@@ -110,7 +110,9 @@ export function LoginFormInput() {
             <span className=" capitalize text-primary underline " style={{fontSize:'20px', fontWeight:'500',  lineHeight:'27px'}} >forget password?</span>
           </Link>
         </div>
+        <Link href='/'>
         <Button type="submit" variant='default' size='lg'><span style={{fontSize:'22px'}}>Sign In</span></Button>
+        </Link>
       </form>
     </Form>
   )
