@@ -39,7 +39,7 @@ const Footer = () => {
             
          <div className=' w-[80%] m-auto grid grid-cols-2 gap-4'>
 
-         <div className=' flex flex-col items-center gap-2'>
+         <div className=' flex flex-col items-start gap-2'>
             <h1 className=' text-[20px] font-medium'> Our Page </h1>
                 <span className=' text-[15px] font-normal'>Blog</span>
                 <span  className=' text-[15px] font-normal'>Our Service</span>
@@ -47,7 +47,7 @@ const Footer = () => {
                 <span  className=' text-[15px] font-normal'>Our Team</span>
             </div>
             
-            <div className=' flex items-center gap-2 flex-col'>
+            <div className=' flex items-start gap-2 flex-col'>
             <h1 className=' text-[20px] font-medium'>Quick Links</h1>
                 <span  className=' text-[15px] font-normal'>FAQ</span>
                 <span  className=' text-[15px] font-normal'>Subscription</span>
