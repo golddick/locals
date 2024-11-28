@@ -16,7 +16,7 @@ const TopNav = () => {
         </div>
 
         <div className='  w-[50px] h-[50px]  relative'>
-      <Image src='/LocalLogo.png' alt='logo' fill className=' absolute   object-contain '/>
+      <Image src='/LocalLogo.png' alt='logo' fill className=' absolute   object-contain  '/>
        </div>
 
        <div className=' hidden md:block'>

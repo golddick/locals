@@ -54,7 +54,7 @@ const page = () => {
     
 
      
-        <div className=' w-full flex flex-col gap-4 items-start '>
+        <div className=' w-full flex flex-col gap-4 items-start  overflow-scroll'>
             {/* <h2 className=' text-[20px]'>My Profile</h2> */}
 
             <div className=' flex items-start gap-5 w-full flex-col'>
@@ -116,7 +116,7 @@ const page = () => {
 
                             <div className=' flex  flex-col gap-2 '>
                                 <label htmlFor="phone" id='phone' className='  text-[13px] font-thin text-[#706A6A]'> Phone Number</label>
-                                <Input placeholder='+234 80 1234 5678' id='phone' type='number' defaultValue='+234 80 1234 5678' className='  border-none  shadow-lg shadow-[#706A6A1A]'/>
+                                <Input placeholder='+234 80 1234 5678' id='phone' type='phone' defaultValue='+234 80 1234 5678' className='  border-none  shadow-lg shadow-[#706A6A1A]'/>
                             </div>
 
                             </div>
@@ -126,7 +126,7 @@ const page = () => {
 
                             <div className=' flex flex-col gap-2 '>
                                 <label htmlFor="dob" id='dob' className=' text-[13px] font-thin text-[#706A6A]'> DOB</label>
-                                    <Input  defaultValue='03 November, 1980' id='dob' type='date' className='  border-none  shadow-lg shadow-[#706A6A1A]'/>
+                                    <Input  defaultValue='03/11/1980' id='dob' type='date' className='  border-none  flex justify-center text-center items-center shadow-lg shadow-[#706A6A1A]'/>
                             </div>
 
                             <div className=' flex  flex-col gap-2 '>
@@ -139,12 +139,14 @@ const page = () => {
 
                             <div className=' flex flex-col gap-2  w-full lg:w-[80%] '>
                             <label htmlFor="bio" id='bio' className='  text-[13px] font-thin text-[#706A6A]'> Personal Bio</label>
-                                <Textarea placeholder='bio' id='bio'  defaultValue='Lorem ipsum dolor sit amet consectetur. Odio sed metus nunc enim massa sapien. Penatibus imperdiet varius magna velit ut. Ultrices sit neque in tristique non senectus. Arcu facilisi scelerisque sagittis viverra fringilla massa.' className=' w-full h-[80px]   border-none  shadow-lg shadow-[#706A6A1A]'/>
+                                <Textarea placeholder='bio' id='bio'  defaultValue='Lorem ipsum dolor sit amet consectetur. 
+                                Ultrices sit neque in tristique non senectus. Arcu facilisi scelerisque sagittis viverra fringilla massa.'
+                                 className=' w-full h-[100px] max-h-[200px]   border-none  shadow-lg shadow-[#706A6A1A] p-2' />
                             </div>
 
 
-                            <div className='  w-full lg:w-[80%] flex items-center justify-between'>
-                           <h1 className='text-[15px]  md:text-[20px] font-semibold'>All Personal Information</h1>
+                            <div className='  w-full lg:w-[80%] flex items-center justify-end'>
+                           {/* <h1 className='text-[15px]  md:text-[20px] font-semibold'>All Personal Information</h1> */}
                             <Button>Save</Button>
                            </div>
                             

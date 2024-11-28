@@ -31,10 +31,10 @@ const Navigation = () => {
       ];
 
   return (
-    <div className='w-full flex flex-col md:flex-row  items-start gap-2 md:gap-4 md:items-center'>
+    <div className='w-full flex flex-col md:flex-row  items-start gap-2 md:gap-0 lg:gap-4 md:items-center'>
 
 {menuItems.map ((category) => (
-          <li key={category.title} className='flex gap-4   '>
+          <li key={category.title} className='flex gap-4 md:gap-2   '>
 
           <MenuLink item={category} key={category.title}/>
 
