@@ -19,6 +19,7 @@ const LoginForm = () => {
     <LoginOption icon='/googleicon.png' optionText='Sign in with Google'/>
     <LoginOption icon='/fbicon.png' optionText='Sign in with Facebook'/>
     </div>
+    
     <div className='flex w-full justify-center'>
         <div className='flex-col md:flex-row flex items-center  gap-2'>
         <p style={{fontSize:'20px', fontWeight:'700', lineHeight:'27px'}}> Don’t have an account?  </p>

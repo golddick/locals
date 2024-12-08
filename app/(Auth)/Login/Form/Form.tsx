@@ -1,14 +1,3 @@
-// import React from 'react'
-
-// const Form = () => {
-//   return (
-//     <div >
-        
-//     </div>
-//   )
-// }
-
-// export default Form
 
 "use client"
 
@@ -56,7 +45,8 @@ export function LoginFormInput() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-5">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 mt-5">
+
         <FormField
           control={form.control}
           name="email"
@@ -105,14 +95,17 @@ export function LoginFormInput() {
             </FormItem>
           )}
         />
-        <div className="flex w-full items-center justify-end ">
+
+        <div className="flex w-full items-center justify-end  ">
           <Link href='/OTP'>
             <span className=" capitalize text-primary underline " style={{fontSize:'20px', fontWeight:'500',  lineHeight:'27px'}} >forget password?</span>
           </Link>
         </div>
+
         <Link href='/'>
         <Button type="submit" variant='default' size='lg'><span style={{fontSize:'22px'}}>Sign In</span></Button>
         </Link>
+
       </form>
     </Form>
   )

@@ -52,6 +52,7 @@ const BusinessRow = () => {
                             name={info.name}
                             bio={info.bio}
                             img={info.img}
+                            id={info.id}
                         />
                     ))}
             

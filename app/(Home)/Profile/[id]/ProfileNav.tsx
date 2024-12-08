@@ -19,7 +19,7 @@ const ProfileNav = ({ data }: ProfileProps) => {
   const pathname = usePathname(); 
 
   return (
-    <div className='bg-[#DFE5EC4D] rounded-xl p-4 flex flex-col w-full gap-4 justify-center items-center'>
+    <div className='bg-[#DFE5EC4D] rounded-xl p-4 flex flex-col w-full gap-4   items-start'>
         {data.map((item) => {
         const isActive = pathname === item.path; 
         return (

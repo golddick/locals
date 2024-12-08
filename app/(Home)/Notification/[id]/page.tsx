@@ -1,24 +1,31 @@
 'use client'
 
 import React from 'react'
-import ProfileNav from '../Profile/ProfileNav';
-import { BellDotIcon, User } from 'lucide-react';
+import ProfileNav from '../../Profile/[id]/ProfileNav';
+import { BellDotIcon, FactoryIcon, User } from 'lucide-react';
 import NotificationBody from './NotificationBody';
 
 const page = () => {
 
+  const userId = 221
+
     const profileNav = [
         
-        {
-          title: " My Profile",
-          path: "/Profile",
-          icon:<User/>
-        },
-        {
-          title: "Notification",
-          path: "/Notification",
-          icon:<BellDotIcon/>
-        },
+      {
+        title: " My Profile",
+        path: `/Profile/${userId}`,
+        icon:<User/>
+      },
+      {
+        title: "My Business",
+        path: `/BusinessForm/${userId}`,
+        icon:<FactoryIcon/>
+      },
+      {
+        title: "Notification",
+        path: `/Notification/${userId}`,
+        icon:<BellDotIcon/>
+      },
  
   ];
 
