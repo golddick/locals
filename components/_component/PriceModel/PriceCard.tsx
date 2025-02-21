@@ -14,7 +14,7 @@ interface PriceProps{
 
 const PriceCard = ({ name, amount, features }: PriceCardProps) => {
   return (
-    <div className="mt-5 border-[#00000199] border-[1px] hover:bg-primary rounded-xl w-full">
+    <div className="mt-5 border-[#00000199] border-[1px] hover:bg-primary hover:text-neutral-200 rounded-xl w-full">
       <div className="p-4 flex flex-col gap-2 items-start">
         <span className="text-[20px] font-medium">{name}</span>
         <div className="flex items-center gap-2">

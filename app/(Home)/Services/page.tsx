@@ -6,9 +6,9 @@ import Link from 'next/link'
 
 const page = () => {
   return (
-    <div className=' grid grid-cols-1 md:grid-cols-2 gap-4 w-full  py-10  md:h-[calc(100vh-500px)] lg:h-[calc(100vh-100px)] '>
+    <div className=' grid grid-cols-1 md:grid-cols-2 gap-4 w-full  py-10  md:h-[calc(100vh-500px)] lg:h-[calc(100vh-200px)] '>
       
-      <div className=' w-full m-auto  h-auto gap-4  md:h-[90%] lg:h-[80%]  flex flex-col  justify-between'>
+      <div className=' w-full m-auto  h-auto gap-4  md:h-[90%] lg:h-[70%]  flex flex-col  justify-between '>
 
           <h1 className='px-20 text-[30px] font-semibold whitespace-nowrap'>Special <span className=' text-primary'>Services</span></h1>
 
@@ -20,12 +20,22 @@ const page = () => {
              This registration helps us maintain a secure and engaged community, allowing us to provide the best support possible.</p>
           </div>
 
-<Link href='/Services/Request'>
-          <Button className=' flex items-center gap-2 rounded-full w-[200px]  ml-20 justify-between'>
-            <span>Make Request</span>
-            <ArrowRight className=' rounded-full p-[2px] w-6 h-6 text-primary bg-white'/>
-          </Button>
-</Link>
+            <div className=' flex  px-2 justify-center md:justify-start flex-row items-start md:items-center gap-2'>
+
+            <Link href='/Services/Request'>
+                      <Button className=' flex items-center gap-2 rounded-full w-[150px] md:w-[200px] md:ml-20 justify-between'>
+                        <span>Make Request</span>
+                        <ArrowRight className=' rounded-full p-[2px] w-6 h-6 text-primary bg-white'/>
+                      </Button>
+            </Link>
+
+            <Link href='/Services/Prev_Request'>
+                      <Button className=' flex items-center gap-2 rounded-full w-[150px] md:w-[200px]   justify-between'>
+                        <span className=' truncate'>Previous Request</span>
+                        <ArrowRight className=' rounded-full p-[2px] w-6 h-6 text-primary bg-white'/>
+                      </Button>
+            </Link>
+            </div>
       </div>
          
 

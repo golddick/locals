@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -49,8 +50,13 @@ const Footer = () => {
             
             <div className=' flex items-start gap-2 flex-col'>
             <h1 className=' text-[20px] font-medium'>Quick Links</h1>
+                <Link href={'/FAQ'}>
                 <span  className=' text-[15px] font-normal'>FAQ</span>
+                </Link>
                 <span  className=' text-[15px] font-normal'>Subscription</span>
+                <Link href={'/admin/88/dashboard'}>
+                <span  className=' text-[15px] font-normal'>admin</span>
+                </Link>
 
                
             </div>
