@@ -24,11 +24,16 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
         };
 
   return (
-    <div className=' flex flex-col gap-6 items-start'>
-        <div className=' flex items-start gap-2 flex-wrap'>
-        {categories.map((text, index) => (
-       <span key={index} className={`text-[20px] font-medium ${index === 1 ? 'text-primary' : ''}`}>{text}.</span>
-        ))}
+    <div className=' flex flex-col gap-4 items-start'>
+        <div className='flex  items-center gap-2'>
+            {categories.map((text, index) => (
+                <span 
+                    key={index} 
+                    className={`text-[16px] font-medium ${index > 0 && index % 2 !== 0 ? 'text-primary' : ''}`}
+                >
+                    {text}.
+                </span>
+                ))}
         </div>
 
         <h1 className=' text-[35px] font-medium'>{name}</h1>
@@ -43,8 +48,8 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
                         
                         </div>
                         <div className='flex items-center '>
-                            <span className=' text-primary text-[20px]'>{Review}+</span>
-                            <span className=' text-[20px]'>Review</span>
+                            <span className=' text-primary text-[15px]'>{Review}+</span>
+                            <span className=' text-[15px]'>Review</span>
                         </div>
         </div>
 

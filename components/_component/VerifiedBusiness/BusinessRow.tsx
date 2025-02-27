@@ -45,7 +45,7 @@ const BusinessRow = () => {
   return (
     <div className='w-full  flex flex-col gap-8'>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  justify-between gap-4 w-full'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  justify-between gap-4 w-full'>
             {BusinessInfo.map((info) => (
                         <BusinessCard 
                             key={info.id}

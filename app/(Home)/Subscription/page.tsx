@@ -12,7 +12,7 @@ const page = () => {
         <p className=' text-[20px]'> Select a plan that best suit your business needs</p>
         </div>
 
-        <div className='flex w-full  items-center lg:gap-[100px]   overflow-scroll  hidden-scrollbar  py-4 md:py-0'>
+        <div className='flex w-full  items-center lg:gap-[20px] overflow-scroll  hidden-scrollbar  py-4 md:py-0 gap-2'>
 
           <div className='flex gap-4 items-center border border-[#000000]  rounded-full px-6 py-2'>
             <ReceiptIcon className='w-10 h-10 p-3 rounded-full bg-[#706A6A40]'/>
@@ -23,17 +23,17 @@ const page = () => {
           </div>
 
 
-          <div className='flex gap-4 items-center  px-6 py-2'>
+          <div className='flex gap-4 items-center border border-[#000000]  rounded-full px-6 py-2'>
           <HandCoinsIcon className='w-10 h-10 p-3 rounded-full bg-[#706A6A40]'/>
             <div className=' flex flex-col  items-start'>
               <span className=' text-[#706A6A] text-[15px]'>Cost</span>
-              <p className=' text-[17px]'>$ 25</p>
+              <p className=' text-[17px] text-nowrap'>$ 25</p>
             </div>
           </div>
 
 
 
-          <div className='flex gap-4 items-center  rounded-full px-6 py-2'>
+          <div className='flex gap-4 items-center border border-[#000000]  rounded-full px-6 py-2'> 
           <TimerIcon className='w-10 h-10 p-3 rounded-full bg-[#706A6A40]'/>
             <div className=' flex flex-col  items-start'>
               <span className=' text-[#706A6A] text-[15px]  whitespace-nowrap '>Renewal Date</span>

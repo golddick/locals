@@ -22,7 +22,6 @@ const page = () => {
             Contact:'+2348012345678'
         }
 
-        console.log(BusinessInfo)
 
 
   return (

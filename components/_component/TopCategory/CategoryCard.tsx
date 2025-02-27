@@ -9,7 +9,7 @@ interface CategoryCardProps {
   const CategoryCard = ({ bg, BTNText }: CategoryCardProps) => {
     return (
       <div
-        className="w-[250px] h-[300px] rounded-xl bg-cover bg-center"
+        className="w-full h-[300px] rounded-xl bg-cover bg-center"
         style={{ backgroundImage: `url(${bg})` }} 
       >
         <div className="flex h-full  relative ">

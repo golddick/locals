@@ -62,7 +62,7 @@ const TestimonialRow = () => {
             <Button className='  rounded-full hidden md:block' size='icon'>
                 <ArrowLeft className=' text-center flex  md:ml-1 lg:ml-2'/>
             </Button>
-            {TestimonialInfo.slice(0,3).map((info) => (
+            {TestimonialInfo.slice(0,4).map((info) => (
                 <TestimonialCard
                 name={info.name}
                 service={info.service}

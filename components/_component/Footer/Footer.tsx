@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -37,20 +38,30 @@ const Footer = () => {
 
         <div className=' flex  flex-col items-center justify-center w-full'>
             
-         <div className=' w-[80%] m-auto grid grid-cols-2 gap-4'>
+         <div className=' w-full md:w-[80%] m-auto grid grid-cols-2 gap-4 '>
 
          <div className=' flex flex-col items-start gap-2'>
             <h1 className=' text-[20px] font-medium'> Our Page </h1>
-                <span className=' text-[15px] font-normal'>Blog</span>
+                <Link href={'/Our-service'}>
                 <span  className=' text-[15px] font-normal'>Our Service</span>
+                </Link>
+                <Link href={'/Contact-us'}>
                 <span  className=' text-[15px] font-normal'>Contact Us</span>
+                </Link>
+                <Link href={'/Our-team'}>
                 <span  className=' text-[15px] font-normal'>Our Team</span>
+                </Link>
             </div>
             
             <div className=' flex items-start gap-2 flex-col'>
             <h1 className=' text-[20px] font-medium'>Quick Links</h1>
+                <Link href={'/FAQ'}>
                 <span  className=' text-[15px] font-normal'>FAQ</span>
+                </Link>
                 <span  className=' text-[15px] font-normal'>Subscription</span>
+                <Link href={'/admin/88/dashboard'}>
+                <span  className=' text-[15px] font-normal'>admin</span>
+                </Link>
 
                
             </div>
