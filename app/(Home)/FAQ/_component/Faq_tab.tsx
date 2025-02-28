@@ -15,7 +15,6 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-<<<<<<< HEAD
 import { QueTask } from "./QueTab"
 
 
@@ -73,63 +72,6 @@ export function Faq_Tab() {
       </TabsContent>
       <TabsContent value="Services" className=" border-none shadow-none">
       <QueTask  data={faqData.services}/>
-=======
-
-export function Faq_Tab() {
-  return (
-    <Tabs defaultValue="General" className="w-full">
-      <TabsList className="grid w-[40%] ml-0 grid-cols-4">
-        <TabsTrigger value="General">General</TabsTrigger>
-        <TabsTrigger value="Community">Community</TabsTrigger>
-        <TabsTrigger value="Subscription">Subscription</TabsTrigger>
-        <TabsTrigger value="Subscription">Subscription</TabsTrigger>
-      </TabsList>
-      <TabsContent value="General">
-        <Card className=" border-none">
-          <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you're done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
-      <TabsContent value="Community">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you'll be logged out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
->>>>>>> c6fba7d59e70ebe264ebfc1d8d8886af3a1e3066
       </TabsContent>
     </Tabs>
   )
