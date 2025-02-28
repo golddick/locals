@@ -7,7 +7,7 @@ const page = () => {
 
 
   return (
-    <div className='gap-4 w-full  py-10 flex flex-col  px-10 md:px-20 items-start '> 
+    <div className='gap-4 w-full  py-10 flex flex-col  px-5 md:px-20 items-start '> 
       <RequestINFO info={SingleRequestInfo}/>
       </div>
   )

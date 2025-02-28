@@ -9,8 +9,8 @@ import { BusinessFilter } from './BusinessFilter'
 const page = () => {
   return (
     <div className=' flex flex-col gap-2 w-full  py-10'> 
-      <BusinessMenu/>
-      <div className=' grid grid-cols-1 md:grid-cols-[0.5fr_2fr] mt-5'>
+      {/* <BusinessMenu/> */}
+      <div className=' grid grid-cols-1 md:grid-cols-[0.5fr_2fr] '>
 
         <div className=' hidden md:block border-r p-4   '>
           <div className=' w-full rounded-xl p-4 text-white flex flex-col gap-4 items-center bg-primary'>
@@ -26,7 +26,7 @@ const page = () => {
           <BusinessFilter/>
         </div>
 
-        <div className=' flex flex-col gap-4 p-4 px-10  '>
+        <div className=' flex flex-col gap-4 p-4 px-5  '>
 
           <div className=' flex flex-col md:flex-row items-center justify-between w-full  gap-2'>
        <div className=' flex items-start w-full md:items-center gap-4'>

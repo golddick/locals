@@ -18,7 +18,7 @@ import {  Award, Calendar, MapPin, Search } from "lucide-react"
   
   export function BusinessMenu() {
     return (
-      <Menubar className=" bg-primary flex items-center justify-between  rounded-none overflow-scroll">
+      <Menubar className=" bg-primary flex items-center justify-between  rounded-none overflow-scroll  hidden-scrollbar">
 
        <div className=" w-[100%] m-auto flex justify-between gap-4 p-2">
 
@@ -100,7 +100,7 @@ import {  Award, Calendar, MapPin, Search } from "lucide-react"
           </MenubarContent>
         </MenubarMenu>
 
-        <div className="w-[2px] h-9  bg-[#F8F8F8]"></div>
+        {/* <div className="w-[2px] h-9  bg-[#F8F8F8]"></div>
 
         <MenubarMenu  >
        <MenubarTrigger>
@@ -118,7 +118,7 @@ import {  Award, Calendar, MapPin, Search } from "lucide-react"
             </MenubarItem>
          
           </MenubarContent>
-        </MenubarMenu>
+        </MenubarMenu> */}
 
        </div>
       </Menubar>

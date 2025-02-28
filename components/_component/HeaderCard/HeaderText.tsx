@@ -4,7 +4,7 @@ const HeaderText = () => {
   return (
     <div className='flex flex-col gap-4 items-start '>
         <div>
-        <h1  className=' text-[25px]  lg:text-[30px]  capitalize font-semibold'>Connecting <span className=' text-primary'>Locals</span> and <span className=' text-primary'>Businesses</span>: </h1>
+        <h1  className=' text-[25px]  md:text-[30px]  capitalize font-semibold'>Connecting <span className=' text-primary'>Locals</span> and <span className=' text-primary'>Businesses</span>: </h1>
             <h2  className=' text-[15px] font-semibold  lg:text-[20px]  '>Driving a Sustainable Community for <span className=' text-primary'> Business Solutions</span></h2>
         </div>
         <div>

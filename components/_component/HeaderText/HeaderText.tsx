@@ -9,7 +9,7 @@ interface TextHeaderProps{
 const HeaderText = ({HeaderText}:TextHeaderProps) => {
   return (
   <div>
-    <h1  className=' text-[25px]  lg:text-[30px]  capitalize font-semibold'>{HeaderText} </h1>
+    <h1  className='  text-[25px] font-semibold whitespace-nowrap md:text-[30px] capitalize'>{HeaderText} </h1>
   </div>
   )
 }

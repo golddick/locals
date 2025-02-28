@@ -7,13 +7,13 @@ import { Textarea } from '@/components/ui/textarea'
 
 const page = () => {
   return (
-    <div className=' flex flex-col gap-10 w-full  py-10  px-10 md:px-20   min-h-screen'> 
+    <div className=' flex flex-col gap-10 w-full  py-10  px-5 md:px-20   min-h-screen'> 
 
 
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 justify-between  w-full  '>
 
     <div className=' flex flex-col gap-1 items-start '>
-        <h1 className=' text-[25px] lg:text-[30px] font-semibold whitespace-nowrap md:text-[30px] '>Frequently Asked <span className=' text-primary'>Questions</span> </h1>
+        <h1 className=' text-[25px] font-semibold whitespace-nowrap md:text-[30px] '>Frequently Asked <span className=' text-primary'>Questions</span> </h1>
         <p className=' text-[20px]'> These are the most commonly asked questions about The Locals.</p>
         </div>
 

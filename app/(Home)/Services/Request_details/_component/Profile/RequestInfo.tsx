@@ -11,7 +11,7 @@ interface ProfileINFOProps {
 
 export const RequestINFO = ({info}:ProfileINFOProps) => {
   return (
-    <div className=' flex flex-col w-full h-full p-6  gap-4 bg-[#706A6A1A] rounded-lg'>
+    <div className=' flex flex-col w-full h-full p-2  gap-4 bg-[#706A6A1A] rounded-lg'>
     <div className=' flex items-center justify-between gap-4 w-full'>
       <PageHeader text={info.user_name}/>
       <SelectStatus status={info.status}/>

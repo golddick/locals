@@ -31,7 +31,7 @@ export default function CategoryRow() {
   }, []);
 
   return (
-    <div className=" flex w-full gap-4 items-center ">
+    <div className=" flex w-full gap-2  md:gap-4 items-center  ">
 
       {/* Custom Previous Button */}
       <div
@@ -55,7 +55,7 @@ export default function CategoryRow() {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         breakpoints={{
-          320: { slidesPerView: 2 },
+          320: { slidesPerView: 1 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 5 },
         }}

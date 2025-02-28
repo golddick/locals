@@ -25,7 +25,7 @@ const page = () => {
 
 
   return (
-    <div className='grid  grid-cols-1 gap-4 md:grid-cols-2 w-full h-full lg:gap-6   px-10 lg:px-20 py-10  '>
+    <div className='grid  grid-cols-1 gap-4 md:grid-cols-2 w-full h-full lg:gap-6   px-5 md:px-20 py-10  '>
             <div>
                <Details name={BusinessInfo.name} des={BusinessInfo.bio} categories={BusinessInfo.categories} Review={BusinessInfo.Review} Address={BusinessInfo.Address}  Contact={BusinessInfo.Contact} />
             </div>

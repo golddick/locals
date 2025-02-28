@@ -6,7 +6,7 @@ const WhyUs = () => {
     const img = 'https://cdn-imgix.headout.com/tour/7064/TOUR-IMAGE/b2c74200-8da7-439a-95b6-9cad1aa18742-4445-dubai-img-worlds-of-adventure-tickets-02.jpeg?auto=format&w=780&h=384&q=90&fit=crop&ar=16%3A10'
 
   return (
-    <div className='flex items-center flex-col gap-2    px-10 lg:px-20 py-10  w-full '>
+    <div className='flex items-center flex-col gap-2    px-5 md:px-20 py-10  w-full '>
         <HeaderText HeaderText='Why Choose Us?'/>
         <p className='text-[15px] lg:text-[18px]  text-center'>The Locals Connect is your trusted partner in fostering meaningful community relationships. Our curated directory features verified listings recommended by locals, empowering users to easily discover essential services while enhancing business visibility.<br/> Choose us for a seamless experience that promotes collaboration and growth.</p>
     

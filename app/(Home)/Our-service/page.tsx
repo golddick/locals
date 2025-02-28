@@ -22,7 +22,7 @@ const page = () => {
   }
   return (
     <div className=' flex flex-col gap-10 w-full  py-10     min-h-screen hidden-scrollbar'> 
-      <div className=' flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-10 px-10 '>
+      <div className=' flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-10 px-5 '>
         <HeaderText HeaderText='The Locals Service'/>
         <span className=' text-[#282828CC] w-full md:w-[400px]'>We are a tightly-knit digital hub that provides soltution for SMEs that helps scale their business in a community of well connected locals.</span>
       </div>
@@ -79,7 +79,7 @@ const page = () => {
      
 
 
-    <div className=' flex flex-col gap-2 items-start px-10'>
+    <div className=' flex flex-col gap-2 items-start px-5'>
       <span className=' text-[#282828CC]'>JOIN OUR HUB OF BUSINESSES</span>
         <h3 className=' font-extrabold text-[30px]'>GET IN TOUCH</h3>
         <Link href='/Contact-us'>

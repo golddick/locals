@@ -55,11 +55,19 @@ export function Faq_Tab() {
 
   return (
     <Tabs defaultValue="General" className="w-full shadow-none">
-      <TabsList className="grid w-full  lg:w-[40%] ml-0 grid-cols-4">
-        <TabsTrigger value="General">General</TabsTrigger>
-        <TabsTrigger value="Community">Community</TabsTrigger>
-        <TabsTrigger value="Subscription">Subscription</TabsTrigger>
-        <TabsTrigger value="Services">Services</TabsTrigger>
+      <TabsList className="grid w-full  lg:w-[40%] ml-0 grid-cols-4 gap-4">
+        <TabsTrigger value="General" >
+          <div className=" truncate  max-w-[100px]">General</div>
+        </TabsTrigger>
+        <TabsTrigger value="Community">
+        <div className=" truncate  max-w-[100px]">Community</div>
+        </TabsTrigger>
+        <TabsTrigger value="Subscription">
+        <div className=" truncate  max-w-[100px]">Subscription</div>
+        </TabsTrigger>
+        <TabsTrigger value="Services">
+        <div className=" truncate  max-w-[100px]">Services</div>
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="General" className=" border-none shadow-none">
         <QueTask  data={faqData.general}/>

@@ -12,7 +12,7 @@ const page = () => {
     <div className=' px-10 lg:px-20 '>
       <HeaderText  HeaderText='Contact Us'  />
     </div>
-      <div className=' bg-[#A3C8ED26] w-full flex flex-col p-10'>
+      <div className=' bg-[#A3C8ED26] w-full flex flex-col p-5  md:p-10'>
           <div className=' grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-2 gap-10'>
             <div className='flex flex-col gap-5 items-start'>
               <p className=' text-[#282828CC] text-[20px]'>Email or fill the form to get quick help from The Locals. Our response are prompt and are typically gotten within 24/7</p>

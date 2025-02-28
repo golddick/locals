@@ -71,7 +71,7 @@ export function ContactForm() {
 
         
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rounded-[50px] bg-[#FFFFFF] p-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rounded-[50px] bg-[#FFFFFF] p-5 md:p-10">
             <div className=" flex flex-col gap-2 items-start">
             <h1 className=" font-bold text-[30px]">GET IN TOUCH</h1>
             <p className=" text-[#282828CC] font-semibold">24/7 round the clock response</p>
