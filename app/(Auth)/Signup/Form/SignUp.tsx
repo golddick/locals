@@ -10,7 +10,7 @@ const SignupForm = () => {
   return (
 <div className='w-full h-full p-3'>
 
-     <div className='h-[95%] w-full md:w-[80%] lg:w-[80%] mt-20 m-auto flex flex-col gap-4  '>
+     <div className='h-[95%] w-full md:w-[80%] lg:w-[80%] mt-20 m-auto flex flex-col gap-4 '>
         <FormHeader HeaderText='Create Account' PText='Enter credentials to create account' icon='/emojismile.png'/>
        
       <SignupFormInput/>

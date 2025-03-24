@@ -18,7 +18,7 @@ const adminID = useAdminID()
       </div>
       <div className=' items-center gap-2 hidden lg:flex'>
         <TopBarSearch/>
-        <AvatarIcon/>
+        <AvatarIcon _id={adminID}/>
       </div>
       
       <div className='block lg:hidden'>

@@ -7,12 +7,12 @@ import { ArrowUpDown, Star } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { snakeCaseToTitleCase } from '@/lib/utils';
 import { ActionBTN } from './ActionBTN';
-import { UserInfoType } from '@/type/business_type';
+import { UserInfoType, UserType } from '@/type/business_type';
 import Image from 'next/image';
 
 
 
-export const columns : ColumnDef<UserInfoType>[] = [
+export const columns : ColumnDef<UserType>[] = [
 
   {
     accessorKey: 'user',
@@ -23,9 +23,9 @@ export const columns : ColumnDef<UserInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const name = row.original.name; 
+      const name = row.original.firstname; 
       const email = row.original.email; 
-      const img = row.original.img; 
+      const img = row.original.imageUrl; 
   
       return (
 
@@ -67,7 +67,7 @@ export const columns : ColumnDef<UserInfoType>[] = [
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{Tier}</p>
+       <p>{Tier || 'Blue Tier'}</p>
         </div>
 
       );
@@ -103,7 +103,7 @@ export const columns : ColumnDef<UserInfoType>[] = [
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{last_seen}</p>
+       <p>{last_seen || '10/5/2025'}</p>
         </div>
 
       );
@@ -122,7 +122,7 @@ export const columns : ColumnDef<UserInfoType>[] = [
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{reg_date}</p>
+       <p>{reg_date || '12/2/2024'}</p>
         </div>
 
       );
@@ -138,7 +138,7 @@ export const columns : ColumnDef<UserInfoType>[] = [
   {
     id:'actions',
     cell: ({ row }) => {
-        const id = row.original.id;
+        const id = row.original._id;
         return (
         <ActionBTN requestID={id}/>
         )

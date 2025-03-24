@@ -1,70 +1,94 @@
-import React from 'react'
-import BusinessCard from './BusinessCard'
-import { Button } from '@/components/ui/button'
 
-const BusinessInfo =[
-    {
-        id:1,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-    {
-        id:2,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-    {
-        id:3,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-    {
-        id:4,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-    {
-        id:5,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-    {
-        id:6,
-        name:"Alicent Catering Services",
-        bio:'Offers exquisite, tailor-made menus for any occasion, combining fresh ingredients with exceptional presentation.',
-        img:' https://github.com/shadcn.png'
-    },
-]
+
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import BusinessCard from './BusinessCard';
+import { Button } from '@/components/ui/button';
+import { getAllBusinesses } from '@/app/api/get/businesses';
+import { BusinessType } from '@/type/business_type';
+import Loader from '../Loader/Loader';
 
 const BusinessRow = () => {
+  const [businesses, setBusinesses] = useState<BusinessType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1); 
+  const [limit, setLimit] = useState(10); 
+
+  useEffect(() => {
+    const fetchBusinesses = async () => {
+      try {
+        const response = await getAllBusinesses(page, limit);
+        console.log(response, 'API response'); // Log the response to inspect its structure
+  
+        // Ensure the response has the expected structure
+        if (response && response.status === 'success' && Array.isArray(response.data)) {
+          setBusinesses(response.data); // Update the state with the businesses array
+        } else {
+          throw new Error('Invalid response structure');
+        }
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message); 
+        } else {
+          setError(String(err)); 
+        }
+      } finally {
+        setLoading(false); // Ensure loading is set to false regardless of success or failure
+      }
+    };
+  
+    fetchBusinesses();
+  }, [page, limit]);
+
+
+
+
+        console.log(businesses,'uuuu')
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage); 
+  };
+
+  if (loading) return <Loader />;
+
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div className='w-full  flex flex-col gap-8'>
+    <div className="w-full flex flex-col gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-between gap-4 w-full">
+        { businesses.map((info) => (
+          <BusinessCard
+            key={info._id}
+            name={info.name}
+            bio={info.description}
+            img={info.profileUrl[0] || '/LocalLogo.png'}
+            id={info._id}
+            ratings={info.ratings}
+          />
+        ))}
+      </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  justify-between gap-4 w-full'>
-            {BusinessInfo.map((info) => (
-                        <BusinessCard 
-                            key={info.id}
-                            name={info.name}
-                            bio={info.bio}
-                            img={info.img}
-                            id={info.id}
-                        />
-                    ))}
-            
-            </div>
-
-            <div className='w-full flex items-end justify-end gap-2'>
-                <Button  size='icon' className='rounded-full w-4 h-4 text-[12px] hover:text-white'>1</Button>
-                <Button  size='icon' className='rounded-full w-4 h-4 text-[12px] bg-transparent text-primary hover:text-white'>2</Button>
-                <Button  size='icon' className='rounded-full w-4 h-4 text-[12px] bg-transparent text-primary hover:text-white'>3</Button>
-            </div>
+      <div className="w-full flex items-end justify-end gap-2">
+        {/* Pagination buttons */}
+        {[1, 2, 3].map((pageNumber) => (
+          <Button
+            key={pageNumber}
+            size="icon"
+            className={`rounded-full w-4 h-4 text-[12px] ${
+              page === pageNumber
+                ? 'bg-primary text-white'
+                : 'bg-transparent text-primary hover:text-white'
+            }`}
+            onClick={() => handlePageChange(pageNumber)}
+          >
+            {pageNumber}
+          </Button>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default BusinessRow
+export default BusinessRow;

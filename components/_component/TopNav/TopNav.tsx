@@ -6,7 +6,11 @@ import MobileNav from './MobileNav'
 
 
 
+
 const TopNav = () => {
+
+  
+
   return (
     <div className='w-[90%] p-2 m-auto  px-5 rounded-full flex items-center justify-between shadow-[#00000040] shadow-sm   sticky top-5 bg-white z-50'>
 

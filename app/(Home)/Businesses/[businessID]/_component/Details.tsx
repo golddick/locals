@@ -9,7 +9,7 @@ interface DetailsProps{
     name:string
     des:string
     categories:string[],
-    Review:number
+    Review:string
     Address:string
     Contact:string
 }
@@ -36,7 +36,7 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
                 ))}
         </div>
 
-        <h1 className=' text-[35px] font-medium'>{name}</h1>
+        <h1 className=' text-[35px] font-medium capitalize'>{name}</h1>
         
         <div className='flex items-center gap-4'>
                         <div className=' flex items-center'>

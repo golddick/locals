@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['github.com'], // Allow images from github.com
+    domains: ['www.google.com', 'pixabay.com', 'github.com', ],
   },
 
 };

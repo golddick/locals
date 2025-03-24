@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import {Roboto, Manrope} from 'next/font/google'
 import "./globals.css";
+import { Toaster } from "sonner";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +32,8 @@ export default function RootLayout({
         className={manrope.className}
       >
         {children}
+        <Toaster />
+
       </body>
     </html>
   );

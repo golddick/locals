@@ -1,33 +1,9 @@
-
-// "use client"
-
-// import { Button } from "@/components/ui/button"
-
-
-
-// export function OTPFormInput() {
-
-
-//   return (
-//       <div className="flex flex-col items-center justify-center gap-2">
-
-//             <h3>Confirm OTP</h3>
-//             <p>A verification code has been sent to your mail</p>
-
-//               <Button type="submit" variant='default' size='lg'><span style={{fontSize:'22px'}}>Sign In</span></Button>
-//       </div>
-//   )
-// }
-
-
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-import { useToast } from "@/hooks/use-toast"
-
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -43,75 +19,127 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import Link from "next/link"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import { resendOtp, verifyEmailOtp } from "@/app/api/auth/OTP"
 
 const FormSchema = z.object({
-  pin: z.string().min(6, {
+  otp: z.string().min(6, {
     message: "Your one-time password must be 6 characters.",
   }),
 })
 
 export function OTPFormInput() {
-
-  const { toast } = useToast()
-
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isResending, setIsResending] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      pin: "",
+      otp: "",
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+  // Function to handle OTP verification on form submit
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setIsSubmitting(true)
+
+    try {
+      // Call the verifyOTP API
+      const response = await verifyEmailOtp(data.otp)
+
+      // Handle success (show success toast or handle redirection)
+      toast.success("OTP Verified Successfully!")
+
+      // Navigate to a protected page or redirect after success
+      router.push('/Login') 
+
+    } catch (error) {
+      toast.error("OTP Verified Failed!")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Function to resend OTP
+  async function resendOTP() {
+    setIsResending(true)
+
+    try {
+      // Call the resend OTP API
+      const email = localStorage.getItem("userEmail");
+      if (!email) {
+        toast.error('No Email ')
+        router.push('/ResendOTP');
+        return null
+      }
+      const response = await resendOtp(email)
+
+      // Show a success message after resending OTP
+      toast.success("A new OTP has been sent to your email.")
+    } catch (error) {
+      toast.error("Failed to resend OTP. Please try again.")
+    } finally {
+      setIsResending(false)
+    }
   }
 
   return (
+    <>
+    
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:w-[70%] md:w-[80%] md:mx-auto flex flex-col items-start md:justify-center lg:mx-0 mt-10 space-y-6 ">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full lg:w-[70%] md:w-[80%] md:mx-auto flex flex-col items-start md:justify-center lg:mx-0 mt-10 space-y-6"
+      >
         <FormField
           control={form.control}
-          name="pin"
+          name="otp"
           render={({ field }) => (
-            <FormItem className="w-full ">
-              <div className="w-full flex justify-center ">
-              <FormLabel style={{fontSize:'22px', fontWeight:'700px'}}>Confirm OTP</FormLabel>
-              </div>
-              <FormDescription className=" text-black w-full flex md:justify-center lg:justify-start justify-start" style={{fontSize:'20px', fontWeight:'500px', fontFamily:'manrope'}}>
-              A verification code has been sent to your mail
-              </FormDescription>
-              <FormControl >
-                <InputOTP maxLength={6} {...field} >
-                  <InputOTPGroup className=" w-[100%] m-auto md:w-[70%] lg:w-full md:mx-auto flex justify-between">
-                    <InputOTPSlot index={0}  className="w-10 h-10 bg-[#D9D9D9]"/>
-                    <InputOTPSlot index={1}  className="w-10 h-10 bg-[#D9D9D9]"/>
-                    <InputOTPSlot index={2}  className="w-10 h-10 bg-[#D9D9D9]"/>
-                    <InputOTPSlot index={3}  className="w-10 h-10 bg-[#D9D9D9]"/>
-                    <InputOTPSlot index={4}  className="w-10 h-10 bg-[#D9D9D9]"/>
-                    <InputOTPSlot index={5}  className="w-10 h-10 bg-[#D9D9D9]"/>
+            <FormItem className="w-full">
+              <FormControl>
+                <InputOTP maxLength={6} {...field}>
+                  <InputOTPGroup className="w-[100%] m-auto md:w-[70%] lg:w-full md:mx-auto flex justify-between">
+                    <InputOTPSlot index={0} className="w-10 h-10 bg-[#D9D9D9]" />
+                    <InputOTPSlot index={1} className="w-10 h-10 bg-[#D9D9D9]" />
+                    <InputOTPSlot index={2} className="w-10 h-10 bg-[#D9D9D9]" />
+                    <InputOTPSlot index={3} className="w-10 h-10 bg-[#D9D9D9]" />
+                    <InputOTPSlot index={4} className="w-10 h-10 bg-[#D9D9D9]" />
+                    <InputOTPSlot index={5} className="w-10 h-10 bg-[#D9D9D9]" />
                   </InputOTPGroup>
                 </InputOTP>
               </FormControl>
-            
+
               <FormMessage />
             </FormItem>
           )}
         />
-          <div className="w-full flex items-center justify-center">
-            <Link href='/ResetPassword'>
-          <Button type="submit" className="w-[250px] rounded-xl bg-primary">Verify</Button>
-            </Link>
-          </div>
-    
+        <div className="w-full flex items-center justify-center">
+          <Button
+            type="submit"
+            className="w-[250px] rounded-xl bg-primary"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Verifying..." : "Verify"}
+          </Button>
+        </div>
+
+       
       </form>
     </Form>
+
+    <div className=" w-[200px]">
+    <div className="w-full flex items-center justify-center mt-4">
+          <Button
+            onClick={resendOTP}
+            className="w-[250px] rounded-xl bg-secondary text-primary"
+            disabled={isResending}
+          >
+            {isResending ? "Resending..." : "Resend OTP"}
+          </Button>
+        </div>
+    </div>
+    </>
   )
 }

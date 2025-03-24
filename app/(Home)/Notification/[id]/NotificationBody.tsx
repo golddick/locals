@@ -3,17 +3,17 @@ import NotificationCard from './NotificationCard';
 
 const NotificationBody = () => {
 
-    const Notification = [
+    const notification = [
         
-        {
-          id: 1,
+        { 
+          id: '1',
           title: "Newsletter Update",
           text: "Stay informed! Our latest newsletter is now available, featuring tips on maxi..",
           img:'/frameGuy.png'
         },
          
         {
-            id: 2,
+            id: '2',
             title: "Shoprite Update",
             text: "Stay informed! Our latest newsletter is now available, featuring tips on maxi..",
             img:'/LoginImg.png'
@@ -23,7 +23,7 @@ const NotificationBody = () => {
 
   return (
     <div className=' flex flex-col gap-4 w-full h-auto'>
-        <NotificationCard data={Notification} />
+        <NotificationCard data={notification} />
        
     </div>
   )

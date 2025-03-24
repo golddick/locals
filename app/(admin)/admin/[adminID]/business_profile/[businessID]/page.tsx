@@ -1,17 +1,12 @@
 import React from 'react'
-import { PageHeader } from '../../../_component/pageHeader/PageHeader'
-import { DeleteBTN } from '../../../_component/DeleteBTN/DeleteBTN'
-import { ProfileINFO } from '../../../_component/Profile/ProfileINFO'
-import {  singleBusinessInfo } from '@/type/business_type'
+import BusinessProfileInfo from '../BusinessProfileInfo'
 
-
-const page = () => {
-
+const page =  () => {
 
   return (
-    <div >
-      <ProfileINFO info={singleBusinessInfo}/>
-      </div>
+    <>
+      <BusinessProfileInfo/>
+    </>
   )
 }
 

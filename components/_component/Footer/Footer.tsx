@@ -1,12 +1,29 @@
+'use client'
+
+import { getUserInfo } from '@/app/api/auth/user'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
+import { UserType } from '@/type/business_type'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Footer = () => {
+
+    const [userInfo, setUserInfo] = useState<UserType>();
+    
+      useEffect(() => {
+        const info = getUserInfo();
+        if (info) {
+          setUserInfo(info);
+        }
+      }, []);
+
+      const userId = userInfo?._id
+
   return (
     <div className=' w-full  bg-[#282828] text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 gap-4'>
 
@@ -59,8 +76,9 @@ const Footer = () => {
                 <span  className=' text-[15px] font-normal'>FAQ</span>
                 </Link>
                 <span  className=' text-[15px] font-normal'>Subscription</span>
-                <Link href={'/admin/88/dashboard'}>
-                <span  className=' text-[15px] font-normal'>admin</span>
+                {}
+                <Link href={`/admin/${userId}/dashboard`} className={cn('flex', !userId && 'hidden')}>
+                <span  className=' text-[15px] font-normal'>Admin</span>
                 </Link>
 
                

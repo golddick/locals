@@ -1,68 +1,84 @@
-"use client"
+"use client"; 
 
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
-
+import * as React from "react";
+import { Label, Pie, PieChart } from "recharts";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { Category } from "./Category"
-
-const chartData = [
-  { category: "Cleaning Services", visitors: 275, fill: "#C50C7B" },
-  { category: "Photography Services", visitors: 200, fill: "#FF3D00" },
-  { category: "Catering Services", visitors: 287, fill: "#2CCA33" },
-  { category: "Legal Services", visitors: 173, fill: "#FFCD0F" },
-  { category: "IT & Tech Services", visitors: 153, fill: "#1976D2" },
-  { category: "other", visitors: 190, fill: "#1436D2" },
-]
-
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  Cleaning: {
-    label: "Cleaning Services",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig
+} from "@/components/ui/chart";
+import { Category } from "./Category";
+import { CreateCategorie } from "@/app/(admin)/admin/_component/create-categorie/Create_categorie";
+import { getAllCategory } from "@/app/api/get/categorie";
+import { CategoryType } from "@/type/business_type";
 
 export function CircleChart() {
+  const [categoryData, setCategoryData] = React.useState<CategoryType[]>([]);
+
+  // Fetch category data from the API
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllCategory();
+        setCategoryData(data.data); 
+      } catch (error) {
+        console.error("Error fetching category data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const chartData = React.useMemo(() => {
+    const colors = [
+      "#C50C7B",
+      "#FF3D00",
+      "#2CCA33",
+      "#FFCD0F",
+      "#1976D2",
+      "#1436D2",
+    ]; 
+
+    return categoryData.map((item, index) => ({
+      category: item.name || '', 
+      visitors: item.visitors || 1,
+      fill: colors[index % colors.length], 
+      id: item._id
+    }));
+  }, [categoryData]);
+
+
+  const chartConfig = React.useMemo(() => {
+    const config: ChartConfig = {
+      visitors: {
+        label: "Visitors",
+      },
+    };
+
+    // Add each category to the chartConfig
+    categoryData.forEach((item, index) => {
+      config[item.name] = {
+        label: item.name,
+        color: chartData[index].fill,
+      };
+    });
+
+    return config;
+  }, [categoryData, chartData]);
+
+  // Calculate the total number of visitors
   const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  }, [])
+    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  }, [chartData]);
 
   return (
     <Card className="flex flex-col border-none">
-      <CardContent className="flex-1  grid grid-cols-1  lg:grid-cols-2   justify-center ">
+      <CardContent className="flex-1 grid grid-cols-1 lg:grid-cols-2 justify-center">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
@@ -101,29 +117,29 @@ export function CircleChart() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Business
+                          Categories
                         </tspan>
                       </text>
-                    )
+                    );
                   }
                 }}
               />
             </Pie>
           </PieChart>
         </ChartContainer>
-        <div className=" flex flex-col gap-4  bg-[#FFFFFF]   rounded-xl p-4 ">
-            <h1>Top Listed Categories</h1>
-            {chartData.map((item, index) => (
+        <div className="flex flex-col gap-4 bg-[#FFFFFF] rounded-xl p-4">
+          <CreateCategorie />
+          {chartData.map((item, index) => (
             <Category
               key={index}
               value={item.visitors.toString()}
-              des=""
               name={item.category}
-              color={item.fill} 
+              color={item.fill}
+              categoryID={item.id}
             />
           ))}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

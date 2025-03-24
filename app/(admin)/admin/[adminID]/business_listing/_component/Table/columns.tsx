@@ -5,12 +5,12 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpDown, Star } from "lucide-react";
 import { Button } from '@/components/ui/button';
-import { BusinessInfoType,  } from '@/type/business_type';
+import {  BusinessType,  } from '@/type/business_type';
 import { snakeCaseToTitleCase } from '@/lib/utils';
 import { ActionBTN } from './ActionBTN';
 
 
-export const columns : ColumnDef<BusinessInfoType>[] = [
+export const columns : ColumnDef<BusinessType>[] = [
 
   {
     accessorKey: 'name',
@@ -46,11 +46,11 @@ export const columns : ColumnDef<BusinessInfoType>[] = [
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-         {category.length > 0 && (
-          <p  className="truncate max-w-[100px]" >
-            {category[0]}
+  
+          <p  className="truncate max-w-[200px]" >
+            {category.name}
           </p>
-        )}
+    
       </div>
 
       );
@@ -69,23 +69,23 @@ export const columns : ColumnDef<BusinessInfoType>[] = [
     ),
     cell: ({ row }) => {
       const status = row.original.status;
-      return <Badge variant={status}>{snakeCaseToTitleCase(status)}</Badge>;
+      return <Badge variant={status}>{snakeCaseToTitleCase(status || 'ACTIVE')}</Badge>;
     }
   },
 
   {
-    accessorKey: 'Views',
+    accessorKey: 'email',
     header: ({ column }) => (
       <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-      Views
+      Email
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => {
-      const Views = row.original.view;
+      const email = row.original.email;
 
       return (
-        <p>{Views}</p>
+        <p>{email}</p>
       )
      
     }
@@ -100,7 +100,7 @@ export const columns : ColumnDef<BusinessInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const rating = row.original.rating;
+      const rating = row.original.ratings;
 
       return (
         <div className=' flex items-center gap-2'>
@@ -116,7 +116,7 @@ export const columns : ColumnDef<BusinessInfoType>[] = [
   {
     id:'actions',
     cell: ({ row }) => {
-        const id = row.original.id;
+        const id = row.original._id;
         return (
         <ActionBTN businessID={id}/>
         )

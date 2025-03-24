@@ -1,4 +1,58 @@
 
+
+
+export type UserType =   {
+  _id: string
+  firstname: string,
+  lastname: string,
+  occupation: string,
+  email: string,
+  isEmailVerified:boolean,
+  bio:string,
+  phone:number,
+  address:string,
+  job_descripton:string,
+  imageUrl:string,
+  dob:string,
+  planTier:string
+  last_seen:string
+  reg_date:string
+  status: "active" | "suspeneded" | "in_active" ,
+}
+
+export type CategoryType =   {
+  _id: string
+  name: string,
+  description: string,
+  visitors:number
+
+}
+
+
+export type BusinessType =   {
+  _id: string
+  name: string,
+  category : CategoryType
+  phone:string
+  address:string
+  email:string
+  ratings: number  
+  description:string
+  businessOwner:string
+  profileUrl: string[]
+  services:ServiceType[]
+  status: "active" | "suspeneded" | "in_active" ,
+  planTier:string
+  Review:string
+}
+
+
+export type ServiceType ={
+  _id: string
+  name: string,
+}
+
+
 export type UserInfoType =   {
   id: string
   name: string,
@@ -38,14 +92,14 @@ export type BusinessInfoType =   {
     planTier:string,
     plans: PlanType[];
   }
-export type BusinessType =   {
-    id: string
-    name: string,
-    category : string
-    status: "ACTIVE" | "SUSPENDED" | "IN_ACTIVE" 
-    view: number  
-    rating:string
-  }
+// export type BusinessType =   {
+//     id: string
+//     name: string,
+//     category : string
+//     status: "ACTIVE" | "SUSPENDED" | "IN_ACTIVE" 
+//     view: number  
+//     rating:string
+//   }
 export type RequestInfoType =   {
   id: string;
   user_name: string,

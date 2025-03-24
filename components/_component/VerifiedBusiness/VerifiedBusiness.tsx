@@ -8,7 +8,7 @@ const VerifiedBusiness = () => {
         <h2 className='text-[15px] lg:text-[18px] lg:max-w-[40%]'> Connect  and Transact with our community of Trusted  businesses and high rated service providers. </h2>
         <BusinessRow/>
     </div>
-  )
-}
+  ) 
+} 
 
 export default VerifiedBusiness

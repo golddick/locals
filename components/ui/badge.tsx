@@ -8,6 +8,7 @@ import { RequestInfoType} from '@/type/business_type'
 const badgeVariants = cva(
   "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
+
     variants: {
       variant: {
         default:
@@ -17,9 +18,9 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         outline: "text-foreground",
-        ACTIVE: "border-transparent  border-[#9ABEFC] text-[#9ABEFC] hover:opacity-75",
-        SUSPENDED: "border-transparent border-[#8FDB92] text-[#8FDB92] hover:opacity-75",
-        IN_ACTIVE: "border-transparent border-[#F1A086] text-[#F1A086] hover:opacity-75",
+        active: "border-transparent  border-[#9ABEFC] text-[#9ABEFC] hover:opacity-75",
+        suspeneded: "border-transparent border-[#8FDB92] text-[#8FDB92] hover:opacity-75",
+        in_active: "border-transparent border-[#F1A086] text-[#F1A086] hover:opacity-75",
         Active: "border-transparent border-none text-[#2CCA33] hover:opacity-75",
         Expired: "border-transparent border-none text-[#FF3D00] hover:opacity-75",
         Pending: "border-transparent border-[#FF3D00] text-[#FF3D00] hover:opacity-75",
