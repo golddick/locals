@@ -8,13 +8,8 @@ import { getToken } from "../auth/OTP";
   }
 
   try {
-    const token = getToken();
-  
-    if (!token) {
-      throw new Error('Token not found');
-    }
+
     const headers = {
-      localsToken: `${token}`,
       'Content-Type': 'application/json',
     };
 

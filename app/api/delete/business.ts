@@ -19,7 +19,7 @@ export const deleteBusiness = async (businessId: string) => {
         'Content-Type': 'application/json',
       };
   
-      const response = await fetch(`${apiUrl}/admin/businesses/${businessId}`, {
+      const response = await fetch(`${apiUrl}/businesses/${businessId}`, {
         method: 'DELETE',
         headers: headers,
       });

@@ -11,7 +11,7 @@ interface RestrictBTNProps {
 }
 
 export const RestrictBTN = ({ businessId }: RestrictBTNProps) => {
-    const [currentStatus, setCurrentStatus] = useState<'active' | 'in-active'>('active');
+    const [currentStatus, setCurrentStatus] = useState<'active' | 'suspeneded'>('active');
 
     // Fetch the current status of the business
     useEffect(() => {
@@ -37,7 +37,7 @@ export const RestrictBTN = ({ businessId }: RestrictBTNProps) => {
 
     // Function to toggle the business status
     const handleRestrictBusiness = async () => {
-        const newStatus = currentStatus === 'active' ? 'in-active' : 'active'; // Toggle between active and inactive
+        const newStatus = currentStatus === 'active' ? 'suspeneded' : 'active'; // Toggle between active and inactive
 
         try {
             const response = await restrictBusiness(businessId, newStatus);

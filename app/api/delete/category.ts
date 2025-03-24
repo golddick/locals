@@ -19,9 +19,9 @@ export const deleteCategory = async (categoryId: string) => {
         'Content-Type': 'application/json',
       };
   
-      const response = await fetch(`${apiUrl}/admin/categories/${categoryId}`, {
+      const response = await fetch(`${apiUrl}/categories/${categoryId}`, {
         method: 'DELETE',
-        headers: headers,
+        headers: headers, 
       });
   
       if (!response.ok) {

@@ -76,6 +76,11 @@ const BusinessProfile = () => {
       return;
     }
 
+    if (!selectedCategory) {
+      toast.error("Please select a business category.");
+      return;
+    }
+
     // if (!selectedImage) {
     //   toast.error("Please upload a profile image.");
     //   return;
@@ -94,14 +99,14 @@ const BusinessProfile = () => {
         phone: businessPhone,
         address: businessAddress,
         description: businessBio,
-        category: selectedCategory,
-        businessOwner: userId,
+        category_name: selectedCategory,
         profileUrl: selectedImage ? [selectedImage] :
-         ['https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Ffree-png-vectors%2Favatar&psig=AOvVaw0V9dR70VXqBByvIfKl0VB_&ust=1742722015012000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIjL9sevnYwDFQAAAAAdAAAAABAE',
-          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fsearch%3Fk%3Dprofessional%2Bfemale%2Bavatar&psig=AOvVaw0V9dR70VXqBByvIfKl0VB_&ust=1742722015012000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIjL9sevnYwDFQAAAAAdAAAAABAJ'],
+         ['https://www.dwtraveluae.com/wp-content/uploads/2023/09/IMG-World-Tickets-Only.jpg',
+          'https://www.k12digest.com/wp-content/uploads/2024/03/1-3.jpg'],
         services: businessServices,
       };
 
+      console.log(businessData, 'ii')
       const response = await createBusiness(businessData);
       if (response) {
         toast.success("Business created successfully!");
@@ -186,7 +191,7 @@ const BusinessProfile = () => {
                     {availableCategories.map((category, index) => (
                       <SelectItem
                         key={index}
-                        value={category._id}
+                        value={category.name}
                       >
                         {category.name}
                       </SelectItem>

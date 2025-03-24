@@ -19,7 +19,7 @@ import { getToken } from "../auth/OTP";
     };
 
     const response = await fetch(
-      `${apiUrl}/admin/users`,
+      `${apiUrl}/users`,
       { 
         method: 'GET',
         headers: headers,

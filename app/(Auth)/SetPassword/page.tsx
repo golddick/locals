@@ -4,6 +4,7 @@ import ResetForm from './Form/ResetForm'
 import FormHeader from '../_component/FormHeader/FormHeader'
 import Link from 'next/link'
 import { ResendOTP } from '../OTP/Form/ResendOTP'
+import { ResetFormInput } from './Form/Form'
 
 
 const page = () => {
@@ -14,8 +15,8 @@ const page = () => {
                 
                      <div className='h-[90%] w-full md:w-[80%] lg:w-[80%] mt-20 m-auto flex flex-col gap-4  hidden-scrollbar overflow-scroll '>
                         <FormHeader HeaderText='Resend Otp' PText='Enter email to send otp to email' icon='/emojiHand.png'/>
-                       
-                       set password
+                        
+                       <ResetFormInput/>
                     <div className='flex w-full justify-center mt-10'>
                         <div className='flex-col md:flex-row flex items-center  gap-2'>
                         <p style={{fontSize:'20px', fontWeight:'700', lineHeight:'27px'}}> Back To Login?  </p>

@@ -7,8 +7,7 @@ export const createBusiness = async (businessData: {
   phone: string;
   address: string;
   description: string;
-  category: string;
-  businessOwner: string;
+  category_name: string;
   profileUrl:string[]
   services:string
 }) => {
@@ -43,8 +42,8 @@ export const createBusiness = async (businessData: {
         phone: businessData.phone,
         address: businessData.address,
         description: businessData.description,
-        category: businessData.category, 
-        businessOwner:businessData.businessOwner,
+        category_name: businessData.category_name, 
+        category_description:`${businessData.category_name}' custom description`,
         profileUrl:businessData.profileUrl,
         services:businessData.services
       }),

@@ -19,7 +19,7 @@ export const deleteUser = async (userId: string) => {
         'Content-Type': 'application/json',
       };
   
-      const response = await fetch(`${apiUrl}/admin/users/${userId}`, {
+      const response = await fetch(`${apiUrl}/users/${userId}`, {
         method: 'DELETE',
         headers: headers,
       });

@@ -7,10 +7,22 @@ import { BusinessType } from '@/type/business_type'
 import { getBusiness } from '@/app/api/get/singleBusiness'
 import { toast } from 'sonner'
 import Loader from '@/components/_component/Loader/Loader'
+import { getUserInfo } from '@/app/api/auth/user'
+import { useRouter } from 'next/navigation'
 
 
 
 const BusinessProfilInfo = () => {
+
+  const router = useRouter()
+  const user = getUserInfo()
+
+  if (!user) {
+    toast.error('No user')
+    router.push('/')
+  }
+
+  console.log(user, 'use')
     
       const businessID =  useBusinessID()
     
@@ -36,7 +48,7 @@ const BusinessProfilInfo = () => {
                 if (!business) {
                     <Loader/>
                     toast.error('No Business')
-                    return
+                    return null
                 }
 
   return (

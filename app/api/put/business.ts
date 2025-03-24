@@ -41,7 +41,7 @@ export const updateBusinessInfo = async (businessId: string, businessData: any) 
 
 
 
-  export const restrictBusiness = async (businessId: string, status: 'active' | 'in-active') => {
+  export const restrictBusiness = async (businessId: string, status: 'active' | 'suspeneded') => {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   
       if (!apiUrl) {
@@ -62,14 +62,14 @@ export const updateBusinessInfo = async (businessId: string, businessData: any) 
 
         
   
-          const response = await fetch(`${apiUrl}/admin/businesses/${businessId}/restrict`, {
+          const response = await fetch(`${apiUrl}/businesses/${businessId}/restrict`, {
               method: 'PATCH',
               headers: headers,
               body: JSON.stringify({ status }), 
           });
   
           if (!response.ok) {
-              const errorData = await response.json(); // Parse error response
+              const errorData = await response.json();
               throw new Error(errorData.message || 'Failed to update business status');
           }
   
