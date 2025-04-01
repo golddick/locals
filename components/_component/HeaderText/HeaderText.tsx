@@ -14,4 +14,4 @@ const HeaderText = ({HeaderText}:TextHeaderProps) => {
   )
 }
 
-export default HeaderText
+export default HeaderText 

@@ -20,6 +20,7 @@ const Profile = () => {
     const userId = useUserID()
     const [userData, setUserData] = useState<UserType | null>(null);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false)
 
     // Local state to manage the form input values
     const [formData, setFormData] = useState({
@@ -77,6 +78,7 @@ const Profile = () => {
     // Handle form submission (updating user data)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true)
 
         try {
             const response = await updateUserInfo(userId, formData);
@@ -88,6 +90,8 @@ const Profile = () => {
         } catch (error) {
             console.error('Error updating user data:', error);
             toast.error('Error updating profile.');
+        }finally{
+            setLoading(false)
         }
     };
 
@@ -262,7 +266,11 @@ const Profile = () => {
                         </div>
 
                         <div className="w-full lg:w-[80%] flex items-center justify-end">
-                            <Button type="submit">Save</Button>
+                            <Button type="submit">
+                                {
+                                    loading ? <Loader  className=' size-4 animate-spin'/> : 'Save'
+                                }
+                            </Button>
                         </div>
                     </form>
                 </div>
