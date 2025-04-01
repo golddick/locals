@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { getAllBusinesses } from '@/app/api/get/businesses';
 import { BusinessType } from '@/type/business_type';
 import Loader from '../Loader/Loader';
+import LoaderCircle from '../Loader/Loader';
 
 const BusinessRow = () => {
   const [businesses, setBusinesses] = useState<BusinessType[]>([]);
@@ -51,9 +52,9 @@ const BusinessRow = () => {
     setPage(newPage); 
   };
 
-  if (loading) return <Loader />;
+  if (loading) return <LoaderCircle />;
 
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className=' text-red-600'>Error: {error}</div>;
 
   return (
     <div className="w-full flex flex-col gap-8">

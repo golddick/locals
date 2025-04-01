@@ -1,6 +1,9 @@
+import { getUserInfo } from '@/app/api/auth/user'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { SquareArrowOutUpRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 // import Img from '/frameGuy.png'
 
@@ -41,12 +44,26 @@ const HeaderBottom = () => {
       
     ];
 
+    const user = getUserInfo()
+
+    console.log(user, 'ss')
+
   return (
     <div className='flex items-center justify-between'>
          
-         <Button className=' rounded-full py-2 px-5'>
-            Join Now
-         </Button>
+         {user ? (
+            <Badge className=' text-white py-2 px-4 rounded-s-lg capitalize'>
+                Welcome {user?.firstname}
+            </Badge>
+         ):
+         (
+            <Link href='/Signup'>
+            <Button className=' rounded-full py-2 px-5'>
+               Join Now
+            </Button>
+            </Link>
+         )}
+        
 
         <div>
                 <span className=' text-[15px] md:text-[18px]  text-primary whitespace-nowrap' style={{fontWeight:'300'}}>Some of Our Trusted Vendors</span>

@@ -4,7 +4,7 @@ import BusinessProfilInfo from './_component/BusinessProfilInfo'
 const page = () => {
   return (
     <>
-      <BusinessProfilInfo/>
+      <BusinessProfilInfo />
     </>
   )
 }

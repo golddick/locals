@@ -1,12 +1,12 @@
-import { LoaderCircle } from 'lucide-react'
+
 import React from 'react'
 
-const Loader = () => {
+const LoaderCircle = () => {
   return (
-    <div className=' flex w-full h-[500px] items-center justify-center'>
-      <LoaderCircle className=' size-6 animate-spin'/>
+    <div className=' flex w-full h-[700px] items-center justify-center'>
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
     </div>
   )
 }
 
-export default Loader
+export default LoaderCircle

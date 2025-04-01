@@ -25,7 +25,7 @@ const Footer = () => {
       const userId = userInfo?._id
 
   return (
-    <div className=' w-full  bg-[#282828] text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 gap-4'>
+    <div className=' w-full  bg-[#282828] text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 gap-4 '>
 
         <div className=' w-full flex flex-col gap-4 items-start '>
             

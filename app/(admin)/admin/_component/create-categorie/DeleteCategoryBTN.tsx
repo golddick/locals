@@ -25,7 +25,8 @@ export const DeleteCategoryBTN = ({ categoryID }: Props) => {
     try {
       await deleteCategory(categoryID);
       toast.success('category deleted successfully!');
-      router.push(url)
+      // router.push(`/admin/${adminID}/dashboard`)
+      router.refresh()
     } catch (error) {
       toast.error('Failed to delete category. Please try again.');
     } finally {

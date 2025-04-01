@@ -19,7 +19,7 @@ export default async function Home() {
       <WhyUs/>
       <VerifiedBusiness/>
       <PriceModel/>
-      <Testimonials/>
+      {/* <Testimonials/> */}
     </main>
   );
 }

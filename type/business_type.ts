@@ -53,6 +53,44 @@ export type ServiceType ={
 }
 
 
+export interface SpecialRequestType {
+  _id: string;
+  description: string;
+  address: string;
+  dueDate:Date
+  rating:number
+  status: "Pending" | "Completed" | "In_Progress" | 'Terminated'
+  services:ServiceType[]
+  user:UserType
+}
+
+
+export interface PlanSubscriptionType {
+  _id: string;
+  name: string;
+  price: number;
+  duration: number;
+  features: string[]
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export type UserInfoType =   {
   id: string
   name: string,

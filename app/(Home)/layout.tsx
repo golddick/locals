@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <div className="relative w-full mx-auto   h-auto  flex flex-col gap-2 hidden-scrollbar">
+      <div className="relative w-full mx-auto min-h-screen justify-between   flex flex-col gap-2 hidden-scrollbar">
         <TopNav/>
         {children}
         <Footer/>

@@ -17,8 +17,8 @@ interface Props {
 export function AvatarIcon({ _id, src, alt, fallback }: Props) {
   return (
     <Link href={`/Profile/${_id}`}>
-      <Avatar className="  border">
-        <AvatarImage src={src || "/LocalLogo.png"} alt={alt || "local"}  />
+      <Avatar className="  border p-1">
+        <AvatarImage src={src || "/no-image-icon.png"} alt={alt || "local"}  />
         <AvatarFallback>{fallback || "LL"}</AvatarFallback>
       </Avatar>
     </Link>

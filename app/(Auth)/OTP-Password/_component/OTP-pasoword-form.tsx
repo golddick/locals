@@ -61,7 +61,7 @@ export function OTPFormPasswordInput() {
       toast.success("OTP Verified Successfully!");
   
       // Navigate to a protected page or redirect after success
-      router.push('/SetPassword'); // Adjust the redirect to your needs (for example, redirect to a password reset page)
+      router.push('/SetPassword');
   
     } catch (error) {
       toast.error("OTP Verification Failed! Please try again.");
@@ -70,30 +70,6 @@ export function OTPFormPasswordInput() {
     }
   }
   
-
-  // Function to resend OTP
-  async function resendOTP() {
-    setIsResending(true)
-
-    try {
-      // Call the resend OTP API
-      const email = localStorage.getItem("userEmail");
-      if (!email) {
-        toast.error('No Email ')
-        router.push('/ResendOTP');
-        return null
-      }
-      const response = await resendOtp(email)
-
-      // Show a success message after resending OTP
-      toast.success("A new OTP has been sent to your email.")
-    } catch (error) {
-      toast.error("Failed to resend OTP. Please try again.")
-    } finally {
-      setIsResending(false)
-    }
-  }
-
   return (
     <>
     
@@ -138,17 +114,7 @@ export function OTPFormPasswordInput() {
       </form>
     </Form>
 
-    <div className=" w-[200px]">
-    <div className="w-full flex items-center justify-center mt-4">
-          <Button
-            onClick={resendOTP}
-            className="w-[250px] rounded-xl bg-secondary text-primary"
-            disabled={isResending}
-          >
-            {isResending ? "Resending..." : "Resend OTP"}
-          </Button>
-        </div>
-    </div>
+   
     </>
   )
 }

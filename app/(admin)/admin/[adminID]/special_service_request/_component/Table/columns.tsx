@@ -7,10 +7,10 @@ import { ArrowUpDown, Star } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { snakeCaseToTitleCase } from '@/lib/utils';
 import { ActionBTN } from './ActionBTN';
-import { RequestInfoType } from '@/type/business_type';
+import { RequestInfoType, SpecialRequestType } from '@/type/business_type';
 
 
-export const columns : ColumnDef<RequestInfoType>[] = [
+export const columns : ColumnDef<SpecialRequestType>[] = [
 
   {
     accessorKey: 'name',
@@ -21,7 +21,7 @@ export const columns : ColumnDef<RequestInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const name = row.original.user_name; 
+      const name = row.original.user.firstname; 
   
       return (
 
@@ -41,7 +41,7 @@ export const columns : ColumnDef<RequestInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const email = row.original.email; 
+      const email = row.original.user.email; 
   
       return (
 
@@ -62,11 +62,13 @@ export const columns : ColumnDef<RequestInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const service = row.original.service;
+      const service = row.original.services;
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{service}</p>
+       {service.map((item, index) => (
+         <p key={index}>{item.name}</p>
+       ))}
         </div>
 
       );
@@ -81,11 +83,18 @@ export const columns : ColumnDef<RequestInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const sub_date = row.original.sub_date;
+      const sub_date = row.original.dueDate;
+       // Ensure the date is valid before calling toLocaleDateString
+    const parsedDate = new Date(sub_date);
+
+    // Check if the date is valid
+    if (isNaN(parsedDate.getTime())) {
+      return <p>Invalid Date</p>;  
+    }
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{sub_date}</p>
+       <p>{parsedDate.toLocaleDateString()}</p>
         </div>
 
       );
@@ -100,11 +109,18 @@ export const columns : ColumnDef<RequestInfoType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const due_date = row.original.due_date;
+      const due_date = row.original.dueDate;
+          // Ensure the date is valid before calling toLocaleDateString
+    const parsedDate = new Date(due_date);
+
+    // Check if the date is valid
+    if (isNaN(parsedDate.getTime())) {
+      return <p>Invalid Date</p>; 
+    }
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{due_date}</p>
+       <p>{parsedDate.toLocaleDateString()}</p>
         </div>
 
       );
@@ -132,7 +148,7 @@ export const columns : ColumnDef<RequestInfoType>[] = [
   {
     id:'actions',
     cell: ({ row }) => {
-        const id = row.original.id;
+        const id = row.original._id;
         return (
         <ActionBTN requestID={id}/>
         )

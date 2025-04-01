@@ -44,7 +44,7 @@ const ProfileNav = () => {
           <Link href={item.path} key={item.path}>
             <Button
               className={cn(
-                'w-[30px] md:w-[200px]',
+                'w-[30px] md:w-[150px]',
                 isActive ? 'bg-[#C6CFF8] rounded-full text-primary' : 'text-black'
               )}
               variant='ghost'

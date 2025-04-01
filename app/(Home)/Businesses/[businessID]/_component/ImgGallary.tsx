@@ -17,8 +17,8 @@ const ImgGallery = ({ imgUrls }: ImgGalleryProps) => {
   return (
     <div className='flex flex-col w-full gap-4'>
       {/* Large Image Display */}
-      <div className=' w-full h-[300px] lg:w-[600px] m-auto  lg:h-[500px] relative rounded-xl'>
-        <Image src={selectedImg} alt='img' fill className='object-contain absolute' />
+      <div className=' overflow-hidden w-full h-[300px] lg:w-[600px] m-auto  lg:h-[500px] relative rounded-xl '>
+        <Image src={selectedImg} alt='img' fill className='object-cover absolute rounded-lg' />
       </div>
 
       {/* Small Thumbnails */}
@@ -26,10 +26,10 @@ const ImgGallery = ({ imgUrls }: ImgGalleryProps) => {
         {imgUrls.map((imgUrl, index) => (
           <div
             key={index}
-            className='w-[100px] h-[100px] relative cursor-pointer '
+            className='w-[100px] h-[100px] relative cursor-pointer  rounded-lg overflow-auto hover:shadow-lg transition-shadow duration-300 ease-in-out '
             onClick={() => handleImageClick(imgUrl)}
           >
-            <Image src={imgUrl} alt={`img-${index}`} fill className='object-contain absolute hover:zoom-in' />
+            <Image src={imgUrl} alt={`img-${index}`} fill className='object-cover absolute hover:zoom-in rounded-lg' />
           </div>
         ))}
       </div>

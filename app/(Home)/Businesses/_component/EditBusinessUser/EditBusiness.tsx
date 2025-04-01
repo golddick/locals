@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { Button } from '@/components/ui/button';
@@ -17,13 +16,15 @@ import { getAllCategory } from '@/app/api/get/categorie';
 
 
 interface Props {
-    businessId: string;
+    businessId: string 
 }
 
-const EditBusinessProfile = ({ businessId }: Props) => {
+const EditBusiness = ({ businessId }: Props) => {
     const [businessData, setBusinessData] = useState<BusinessType | null>(null);
-    const [selectedImage, setSelectedImage] = useState<string>('/LocalLogo.png');
-    const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]); // State for categories
+    const [loading , setLoading] = useState(false)
+    const [selectedImage, setSelectedImage] = useState<string>('/no-image-icon.png');
+    const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]);
+
 
     // Local state to manage the form input values
     const [formData, setFormData] = useState({
@@ -88,10 +89,11 @@ const EditBusinessProfile = ({ businessId }: Props) => {
     // Handle form submission (updating business data)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true)
 
         // Validate phone number
         if (!validatePhoneNumber(formData.businessPhone)) {
-            toast.error('Phone number must include a country code (e.g., +234 80 1234 5678)');
+            toast.error('Phone number must include a country code (e.g., +000 00 0000 0000)');
             return;
         }
 
@@ -104,10 +106,8 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                 description: formData.businessBio,
                 // services: formData.businessServices.map((service) => service._id), 
                 category: formData.businessCategory,
-                profileUrl: selectedImage ? [selectedImage] : ['/LocalLogo.png'],
+                profileUrl: selectedImage ? [selectedImage] : ['/no-image-icon.png'],
             };
-
-            console.log(businessData); // Debugging
 
             const response = await updateBusinessInfo(businessId, businessData);
             if (response) {
@@ -118,6 +118,8 @@ const EditBusinessProfile = ({ businessId }: Props) => {
         } catch (error) {
             console.error('Error updating business data:', error);
             toast.error('Error updating business.');
+        }finally{
+          setLoading(false)
         }
     };
 
@@ -220,6 +222,7 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                                     id="businessEmail"
                                     type="email"
                                     className="border-none shadow-lg shadow-[#706A6A1A] bg-[#A3C8ED4D]"
+                                    disabled
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -325,7 +328,9 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                         </div>
 
                         <div className="w-full lg:w-[80%] flex items-center justify-end">
-                            <Button type="submit">Save</Button>
+                            <Button type="submit">
+                              {loading ? <Loader className=' size-4 animate-spin'/> : 'Save'}
+                            </Button>
                         </div>
                     </form>
                 </ScrollArea>
@@ -334,4 +339,4 @@ const EditBusinessProfile = ({ businessId }: Props) => {
     );
 };
 
-export default EditBusinessProfile;
+export default EditBusiness;

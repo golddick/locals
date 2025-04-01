@@ -1,15 +1,11 @@
 import React from 'react'
-import {  RequestInfoType, SingleRequestInfo } from '@/type/business_type'
-import { RequestINFO } from '../_component/Profile/RequestInfo'
-
+import SpecialRequestInfo from '../RequestInfo'
 
 const page = () => {
-
-
   return (
-    <div >
-      <RequestINFO info={SingleRequestInfo}/>
-      </div>
+    <>
+      <SpecialRequestInfo/>
+    </>
   )
 }
 

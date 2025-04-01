@@ -14,6 +14,7 @@ import { updateUserInfo } from '@/app/api/put/user';
 import { toast } from 'sonner';
 import ProfileNav from '../ProfileNav';
 import { useUserID } from '@/hooks/use-get-userID';
+import LoaderCircle from '@/components/_component/Loader/Loader';
 
 const Profile = () => {
     const userId = useUserID()
@@ -101,13 +102,15 @@ const Profile = () => {
 
     // If the user data hasn't been loaded yet, return a loading indicator or null.
     if (!userData) {
-        return <div className=' w-full h-screen flex items-center justify-center'>
-            <Loader className=' size-6 animate-spin' />
-        </div>;
+        return (
+            <LoaderCircle/>
+        )
+          
+        
     }
 
     return (
-        <div className="grid grid-cols-[0.5fr_3fr] gap-4 md:gap-10 w-full py-10 px-5 md:px-20">
+        <div className="grid grid-cols-[0.5fr_3fr] gap-4 md:gap-10 w-full py-10 px-5 md:px-20 min-h-screen">
             <div className="w-full flex flex-col gap-4 ">
                 <h1 className="text-[25px] lg:text-[30px] font-semibold whitespace-nowrap md:text-[30px] hidden md:block">Profile <span className="text-primary">Page</span></h1>
 

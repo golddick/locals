@@ -12,7 +12,7 @@ const page = () => {
   return (
     <div className=' flex flex-col w-full  p-2  gap-8'>
 
-        <section className='grid grid-cols-1  lg:grid-cols-[1fr_2fr]  w-full justify-between gap-6 h-[500px] lg:h-[300px] lg:max-h-[400px] '>
+        <section className='grid grid-cols-1  lg:grid-cols-[1fr_2fr]  w-full justify-between gap-6 h-[600px] lg:h-[300px] lg:max-h-[500px] '>
 
             <div className='flex  items-start w-full  h-full rounded-lg bg-[#FFFFFF]  overflow-x-auto relative'>
             <div className=' flex flex-col gap-2 items-start w-full  h-full p-4 rounded-lg  '>
@@ -23,7 +23,7 @@ const page = () => {
             </div>
 
 
-            <div className='flex  items-start w-full  h-full rounded-lg bg-[#FFFFFF]  overflow-x-auto relative'>
+            <div className='flex  items-start w-full  h-full rounded-lg bg-[#FFFFFF]  overflow-x-auto relative hidden-scrollbar'>
             <div className=' flex flex-col gap-2 items-start w-full  h-full p-4 rounded-lg  '>
                 <h3 className='bg-primary text-white  font-medium text-[15px] p-2 px-4 rounded-lg'>Subscription Settings</h3>
                 <Subscription_Settings/>

@@ -10,10 +10,13 @@ import Loader from '@/components/_component/Loader/Loader'
 import { getUserInfo } from '@/app/api/auth/user'
 import { useRouter } from 'next/navigation'
 
+interface Props {
+  businessid?: string
+}
 
 
-const BusinessProfilInfo = () => {
-
+const BusinessProfilInfo = ( {businessid}:Props) => {
+ 
   const router = useRouter()
   const user = getUserInfo()
 
@@ -22,18 +25,19 @@ const BusinessProfilInfo = () => {
     router.push('/')
   }
 
-  console.log(user, 'use')
     
       const businessID =  useBusinessID()
-    
+
+      const id = businessid || businessID
+
       const [business, setBusiness] = useState<BusinessType> ()
               const [error, setError] = useState<string>()
             
-                // Fetch all businesses
+                // Fetch  business
                 useEffect(() => {
                   const fetchBusinesses = async () => {
                     try {
-                      const data = await getBusiness(businessID);
+                      const data = await getBusiness(id);
                       setBusiness(data.data); 
                     } catch (err) {
                       setError('Failed to fetch categories');
@@ -43,18 +47,20 @@ const BusinessProfilInfo = () => {
                   fetchBusinesses();
                 }, []);
 
-                console.log(businessID, 'bid')
+                
+    // const businessOwner = business?.businessOwner === user._id
+    const businessOwner = business && user && business.businessOwner === user._id;
+
 
                 if (!business) {
                     <Loader/>
-                    toast.error('No Business')
                     return null
                 }
 
   return (
-    <div className='grid  grid-cols-1 gap-4 md:grid-cols-2 w-full h-full lg:gap-6   px-5 md:px-20 py-10  '>
-            <div>
-               <Details name={business.name} des={business.description} categories={business.services.map(service => service.name)} Review={business.Review || ''} Address={business.address}  Contact={business.phone} />
+    <div className='grid  grid-cols-1 gap-4 lg:grid-cols-2 w-full min-h-screen lg:gap-6   px-5   lg:px-20  lg:py-10  '>
+            <div className='w-full '>
+               <Details businessId={id} name={business.name} des={business.description} categories={business.services.map(service => service.name)} Review={business.Review || ''} Address={business.address}  Contact={business.phone}  businessOwner={businessOwner} />
             </div>
 
             <div>

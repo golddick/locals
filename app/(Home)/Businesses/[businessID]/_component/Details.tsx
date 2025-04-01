@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { MapPin, Phone, Star } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import { EditBTN } from '../../_component/EditBusinessUser/EditBTN'
 
 interface DetailsProps{
     name:string
@@ -12,9 +13,11 @@ interface DetailsProps{
     Review:string
     Address:string
     Contact:string
+    businessOwner:boolean
+    businessId:string
 }
 
-const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps) => {
+const Details = ({name, des, categories, Review, Address, Contact, businessOwner, businessId}:DetailsProps) => {
 
 
 
@@ -24,8 +27,8 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
         };
 
   return (
-    <div className=' flex flex-col gap-4 items-start'>
-        <div className='flex  items-center gap-2'>
+    <div className=' flex flex-col gap-4 items-start '>
+        <div className='flex  items-center gap-2 flex-wrap'>
             {categories.map((text, index) => (
                 <span 
                     key={index} 
@@ -36,7 +39,7 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
                 ))}
         </div>
 
-        <h1 className=' text-[35px] font-medium capitalize'>{name}</h1>
+        <h1 className=' text-[25px] md:text-[35px] font-medium capitalize '>{name}</h1>
         
         <div className='flex items-center gap-4'>
                         <div className=' flex items-center'>
@@ -48,30 +51,38 @@ const Details = ({name, des, categories, Review, Address, Contact}:DetailsProps)
                         
                         </div>
                         <div className='flex items-center '>
-                            <span className=' text-primary text-[15px]'>{Review}+</span>
+                            <span className=' text-primary text-[15px]'>{Review || 5}+</span>
                             <span className=' text-[15px]'>Review</span>
                         </div>
         </div>
 
-        <h3 className=' text-[25px] font-medium'>DESCRIPTION</h3>
+        <h3 className=' text-[20px] md:text-[25px] font-medium'>DESCRIPTION</h3>
         <span className='text-[16px]  font-normal'>{des}</span>
 
 
-        <div className='flex flex-col gap-4 items-start'>
+        <div className='flex gap-4 items-start'>
             <div className=' flex items-center gap-2'>
                 <MapPin className='w-4 h-4'/>
-                <span className='text-[20px] font-medium'>{Address}</span>
+                <span className='text-[15px] md:text-[20px] font-medium'>{Address}</span>
             </div>
 
             <div className=' flex items-center gap-2'>
                 <Phone className='w-4 h-4'/>
-                <span className='text-[20px] font-medium'>{Contact}</span>
+                <span className='text-[15px] md:text-[20px] font-medium'>{Contact}</span>
             </div>            
         </div>
 
-        <Button className='w-[60%] m-auto mt-10' onClick={handleClick}>
+       {
+        businessOwner ? (
+            <EditBTN businessId={businessId}/>
+        ):(
+            <Button className='w-[60%] m-auto mt-10' onClick={handleClick}>
             Contact Business 
         </Button>
+        )
+       }
+
+      
     </div>
   )
 }
