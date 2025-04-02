@@ -22,9 +22,9 @@ export const CategoryCard = ({info}:CategoryCardProps) => {
         </div>
         <div >
             <span  className=' font-medium text-[15px] flex items-center gap-1'>Service Type: 
-                <div className=' text-primary'>
+                <div className=' text-primary flex items-center gap-4'>
                     {info.services.map((service, index) => (
-                        <p key={index}>{service.name}</p>
+                        <p key={index}>{service.name}.</p>
                     ))}
                 </div>
             </span>
@@ -39,7 +39,7 @@ export const CategoryCard = ({info}:CategoryCardProps) => {
                         
                         </div>
                         <div className='flex items-center '>
-                            <span className=' text-primary text-[15px]'>+</span>
+                            <span className=' text-primary text-[15px]'>7+</span>
                             <span className=' text-[15px]'>Review</span>
                         </div>
         </div>
@@ -50,7 +50,7 @@ export const CategoryCard = ({info}:CategoryCardProps) => {
             </div>
             <div className=' flex items-center gap-2'>
                 <PhoneCall className=' size-4'/>
-                <p className=' text-[13px]'>{info.user.phone}</p>
+                <p className=' text-[13px]'>{info.user.phone || '+000 00 0000 0000'}</p>
             </div>
             <div className=' flex items-center gap-2'>
                 <Mail className=' size-4'/>

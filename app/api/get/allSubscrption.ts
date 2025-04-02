@@ -1,4 +1,3 @@
-import { getToken } from "../auth/OTP";
 
 // Function to fetch subscriptions
 export  const fetchSubscriptions = async () => {
@@ -9,13 +8,8 @@ export  const fetchSubscriptions = async () => {
   }
 
   try {
-    const token = getToken();
-    if (!token) {
-      throw new Error("Token not found");
-    }
 
     const headers = {
-      localsToken: `${token}`,
       "Content-Type": "application/json",
     };
 

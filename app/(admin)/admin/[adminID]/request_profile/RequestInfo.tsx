@@ -39,7 +39,7 @@ console.log(request, 'lloiii')
    
 
     <div >
-      {request ? <RequestINFO info={request[0]} /> : <LoaderCircle />}
+      {request ? <RequestINFO info={request} /> : <LoaderCircle />}
       </div>
   )
 }

@@ -74,7 +74,7 @@ export const Request_form = () => {
       };
 
       const response = await createServices(ServiceData);
-      if (!response.ok) throw new Error('Submission failed');
+      if (!response) throw new Error('Submission failed');
 
       toast.success('Request submitted successfully!');
       setFormData({
