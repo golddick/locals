@@ -1,4 +1,7 @@
+
+
 'use client'
+
 
 import { useState, useRef, useEffect } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -10,29 +13,43 @@ import 'swiper/css/scrollbar';
 import CategoryCard from './CategoryCard';
 import { Button } from '@/components/ui/button';
 import { ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
-
+import { getAllCategory } from '@/app/api/get/categorie';
+import LoaderCircle from '../Loader/Loader';
 
 export default function CategoryRow() {
   const Img = 'https://github.com/shadcn.png';
-  const img = 'https://cdn-imgix.headout.com/tour/7064/TOUR-IMAGE/b2c74200-8da7-439a-95b6-9cad1aa18742-4445-dubai-img-worlds-of-adventure-tickets-02.jpeg?auto=format&w=780&h=384&q=90&fit=crop&ar=16%3A10';
-
+  const [categories, setCategories] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
+  // Fetch categories when the component mounts
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllCategory();
+        setCategories(response.data); 
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   useEffect(() => {
     if (prevRef.current && nextRef.current) {
-      // Ensure the Swiper instance is aware of the custom buttons
       setIsBeginning(true);
       setIsEnd(false);
     }
   }, []);
 
   return (
-    <div className=" flex w-full gap-2  md:gap-4 items-center  ">
-
+    <div className="flex w-full gap-2 md:gap-4 items-center">
       {/* Custom Previous Button */}
       <div
         ref={prevRef}
@@ -80,29 +97,17 @@ export default function CategoryRow() {
         }}
         className="w-full"
       >
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Home Services" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Gym Services" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Legal Services" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Catering Services" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Spa & Wellness" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Construction Services" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CategoryCard bg={Img} BTNText="Home Cleaning" />
-        </SwiperSlide>
-
-        {/* Add more slides here */}
+        {isLoading ? (
+          <SwiperSlide>
+            <LoaderCircle/>
+          </SwiperSlide> 
+        ) : (
+          categories.map((category, index) => (
+            <SwiperSlide key={index}>
+              <CategoryCard bg={Img} BTNText={category.name} />
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
 
       {/* Custom Next Button */}

@@ -18,12 +18,15 @@ export const RestrictUserBTN = ({ userId }: RestrictBTNProps) => {
         const fetchBusinessStatus = async () => {
             try {
                 const response = await getUserById(userId);
+               
                 if (response.status === 'failed') {
                     throw new Error(response.message || 'Failed to fetch user status');
                 }
 
                 const data = response.data;
+                console.log(data, 'user status response');
                 setCurrentStatus(data.status); 
+                console.log(currentStatus, 'user currentStatus response');
             } catch (error) {
                 console.error('Error fetching user status:', error);
                 toast.error('Error fetching user status');

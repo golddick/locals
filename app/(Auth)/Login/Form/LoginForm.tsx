@@ -5,6 +5,7 @@ import { LoginFormInput } from './Form'
 import LoginOption from '../../_component/LoginOption/LoginOption'
 import Link from 'next/link'
 import OrLine from '../../_component/OrContainer/OrLine'
+import { LegalCheckBox } from '../../_component/Legal/Legal'
 
 const LoginForm = () => {
   return (
@@ -15,18 +16,17 @@ const LoginForm = () => {
        
        <LoginFormInput/>
        <OrLine/>
-    <div className='flex flex-col gap-2 '>
-    <LoginOption icon='/googleicon.png' optionText='Sign in with Google'/>
-    <LoginOption icon='/fbicon.png' optionText='Sign in with Facebook'/>
-    </div>
+  
     
-    <div className='flex w-full justify-center'>
+    <div className='flex w-full justify-between gap-6'>
         <div className='flex-col md:flex-row flex items-center  gap-2'>
         <p style={{fontSize:'20px', fontWeight:'700', lineHeight:'27px'}}> Don’t have an account?  </p>
         <Link href='/Signup'>
         <span className=' text-primary font-[20px]' style={{fontSize:'20px', fontWeight:'700', lineHeight:'27px'}}>Sign Up</span> 
         </Link>
         </div>
+
+        <LegalCheckBox/>
     </div>
      </div>
 

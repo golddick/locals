@@ -14,7 +14,7 @@ export const getAllCategory = async () => {
       };
   
       // Make a GET request to fetch the user by userId
-      const response = await fetch(`${apiUrl}/categories?filter=active&sort=firstname&order=asc&page=1&count=100`, {
+      const response = await fetch(`${apiUrl}/categories`, {
         method: 'GET',
         headers: headers,
       });
@@ -25,6 +25,7 @@ export const getAllCategory = async () => {
   
       const data = await response.json();
       console.log(data, 'cat data'); 
+      console.log(data.data, 'cat data dta'); 
       return data;
     } catch (error) {
       console.error('Error fetching Categorie:', error);

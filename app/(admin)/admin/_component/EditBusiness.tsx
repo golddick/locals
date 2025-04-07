@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { BusinessType, ServiceType } from '@/type/business_type'; // Replace with your actual business type
 import { getBusiness } from '@/app/api/get/singleBusiness';
-import { updateBusinessInfo } from '@/app/api/put/business';
+import { AdminUpdateBusinessInfo, updateBusinessInfo } from '@/app/api/put/business';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getAllCategory } from '@/app/api/get/categorie';
 
@@ -22,7 +22,7 @@ interface Props {
 
 const EditBusinessProfile = ({ businessId }: Props) => {
     const [businessData, setBusinessData] = useState<BusinessType | null>(null);
-    const [selectedImage, setSelectedImage] = useState<string>('/LocalLogo.png');
+    const [selectedImage, setSelectedImage] = useState<string>('/no-image-icon.png');
     const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]); // State for categories
 
     // Local state to manage the form input values
@@ -47,7 +47,7 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                 setBusinessData(businessResponse.data);
 
                 // Initialize selectedImage with the first profile URL or a default image
-                setSelectedImage(businessResponse.data.profileUrl?.[0] || '/default-image.png');
+                setSelectedImage(businessResponse.data.profileUrl?.[0] || '/no-image-icon.png');
 
                 // Initialize formData with business data
                 setFormData({
@@ -104,12 +104,11 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                 description: formData.businessBio,
                 // services: formData.businessServices.map((service) => service._id), 
                 category: formData.businessCategory,
-                profileUrl: selectedImage ? [selectedImage] : ['/LocalLogo.png'],
+                profileUrl: selectedImage ? [selectedImage] : ['/no-image-icon.png'],
             };
 
-            console.log(businessData); // Debugging
 
-            const response = await updateBusinessInfo(businessId, businessData);
+            const response = await AdminUpdateBusinessInfo(businessId, businessData);
             if (response) {
                 toast.success('Business updated successfully!');
             } else {
@@ -206,6 +205,8 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                                     id="businessName"
                                     type="text"
                                     className="border-none rounded-xl shadow-xl shadow-[#706A6A1A] bg-[#A3C8ED4D]"
+                                    readOnly
+                                    disabled
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -276,6 +277,7 @@ const EditBusinessProfile = ({ businessId }: Props) => {
                                 id="businessCategory"
                                 value={formData.businessCategory}
                                 defaultValue={formData.businessCategory}
+                                disabled
                                 onChange={handleCategoryChange}
                                 className="border-none shadow-lg shadow-[#706A6A1A] bg-[#A3C8ED4D] p-2 rounded-md"
                             >
