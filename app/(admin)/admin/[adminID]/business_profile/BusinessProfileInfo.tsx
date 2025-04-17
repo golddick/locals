@@ -15,7 +15,7 @@ const BusinessProfileInfo = () => {
         
             // Fetch all businesses
             useEffect(() => {
-              const fetchBusinesses = async () => {
+              const fetchBusiness = async () => {
                 try {
                   const data = await getBusiness(businessID);
                   setBusiness(data.data); 
@@ -24,7 +24,7 @@ const BusinessProfileInfo = () => {
                 }
               };
           
-              fetchBusinesses();
+              fetchBusiness();
             }, []);
 
 

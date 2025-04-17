@@ -10,7 +10,6 @@ export const getUserById = async (userId: string) => {
     try {
       const token = getToken();
   
-      console.log(token, 'get token for user fetch');
   
       if (!token) {
         throw new Error('Token not found');
@@ -32,7 +31,6 @@ export const getUserById = async (userId: string) => {
       }
   
       const data = await response.json();
-      console.log(data, 'llol data'); 
       return data;
     } catch (error) {
       console.error('Error fetching user:', error);

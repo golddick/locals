@@ -115,15 +115,16 @@ const CreateBusiness = () => {
         };
   
         const response = await createBusiness(businessData);
-        if (response) {
+        if (response?.success) {
           toast.success("Business created successfully!");
-          router.push(`/BusinessForm/${response.data._id}`);
+          // router.push(`/BusinessForm/${response.data._id}`);
         } else {
-          toast.error("Error creating business!");
+          toast.error( response?.message || "Error creating business!");
         }
-      } catch (error) {
+      } catch (error:any) {
+        const errorMessage = error?.response || 'Error creating business!';
         console.error("Error creating business:", error);
-        toast.error("Something went wrong while creating the business.");
+        toast.error(errorMessage);
       }finally{
         setIsSubmitting(false);
       }

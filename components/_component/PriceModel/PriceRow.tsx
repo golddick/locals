@@ -39,11 +39,13 @@ const PriceRow = () => {
         )
     }
 
+    console.log(subscriptions, 'subscriptions')
+
 
   return (
     <div className=' w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-between '>
        {subscriptions.map((price) => (
-        <PriceCard key={price._id} name={price.name} amount={price.price} features={price.features} />
+        <PriceCard key={price._id} name={price.name} amount={price.price} features={price.features} duration={price.duration} />
       ))}
     </div>
   )

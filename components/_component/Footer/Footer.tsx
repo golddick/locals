@@ -77,9 +77,14 @@ const Footer = () => {
                 </Link>
                 <span  className=' text-[15px] font-normal'>Subscription</span>
                 {}
-                <Link href={`/admin/${userId}/dashboard`} className={cn('flex', !userId && 'hidden')}>
+                {/* <Link href={`/admin/${userId}/dashboard`} className={cn('flex', !userId && 'hidden')}>
                 <span  className=' text-[15px] font-normal'>Admin</span>
+                </Link> */}
+                {userId && (
+                <Link href={`/admin/${userId}/dashboard`} className="flex">
+                  <span className="text-[15px] font-normal">Admin</span>
                 </Link>
+              )}
 
                
             </div>

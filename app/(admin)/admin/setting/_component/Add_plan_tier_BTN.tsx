@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 'use client'
 
 import { createSubscriptionPlan } from "@/app/api/post/createPlan"
@@ -18,82 +23,84 @@ import { Label } from "@/components/ui/label"
 import { Loader, Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
-import { toast } from "sonner" // Assuming you use Sonner for toasts
-
+import { toast } from "sonner"
 
 export function Add_plan_tier_BTN() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  // State for form data
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    duration: 1, 
+    duration: 1,
     features: ["", ""],
-  });
+  })
 
-  // Add function to submit the form to the endpoint
   const createSubscription = async (subscriptionData: any) => {
+
     try {
-      setLoading(true);
-      const response = await createSubscriptionPlan(subscriptionData);
-  
-      if (!response) {
-        throw new Error("Failed to create subscription plan.");
-      }
-  
-      toast.success("Subscription Plan Created Successfully!");
-      router.refresh(); // Refresh the page or re-fetch subscription list
+      setLoading(true)
+      const response = await createSubscriptionPlan(subscriptionData)
+      if (!response) throw new Error("Failed to create subscription plan.")
+
+      toast.success("Subscription Plan Created Successfully!")
+      router.refresh()
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to create subscription plan.";
-      toast.error(errorMessage);
+      toast.error(error instanceof Error ? error.message : "Failed to create subscription plan.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    field: string,
+    index?: number
+  ) => {
+    const value = e.target.value
+  
+    if (field === "features" && typeof index === "number") {
+      const updatedFeatures = [...formData.features]
+      updatedFeatures[index] = value
+      setFormData({ ...formData, features: updatedFeatures })
+    } else if (field === "duration") {
+      // Ensure duration is always a number
+      setFormData({ ...formData, duration: parseInt(value, 10) })
+    } else {
+      setFormData({ ...formData, [field]: value })
+    }
+  }
   
 
-
-  // Handle input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string, index?: number) => {
-    if (field === "features" && typeof index === "number") {
-      const updatedFeatures = [...formData.features];
-      updatedFeatures[index] = e.target.value;
-      setFormData({ ...formData, features: updatedFeatures });
-    } else {
-      setFormData({ ...formData, [field]: e.target.value });
-    }
-  };
-
-  // Add more feature fields
   const addFeature = () => {
-    setFormData({ ...formData, features: [...formData.features, ""] });
-  };
+    setFormData({ ...formData, features: [...formData.features, ""] })
+  }
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    // Validate if name, price, and features are filled
-    if (!formData.name || !formData.price || formData.features.some(feature => !feature.trim())) {
-      toast.error("Please fill in all fields.");
-      return;
+    if (
+      !formData.name ||
+      !formData.price ||
+      formData.features.some((feature) => !feature.trim()) ||
+      Number(formData.duration) < 1 ||
+      Number(formData.duration) > 12
+    ) {
+      toast.error("Please fill in all fields and ensure duration is between 1 and 12 months.")
+      return
     }
 
-    // Send the form data to the server to create the subscription plan
+
+
     const subscriptionData = {
       name: formData.name,
-      price: formData.price,
-      duration: formData.duration,
-      features: formData.features.filter(feature => feature.trim()), // Filter empty features
-    };
+      price: parseFloat(formData.price),
+      duration: Number(formData.duration), // ✅ force number type here
+      features: formData.features.filter((feature) => feature.trim()),
+    };   
 
-    // Call the function to submit the data
-    await createSubscription(subscriptionData);
-
-    // Reset form
-    setFormData({ name: "", price: "", duration: 1, features: ["", ""] });
-  };
+    await createSubscription(subscriptionData)
+    setFormData({ name: "", price: "", duration: 1, features: ["", ""] })
+  }
 
   return (
     <Dialog>
@@ -105,6 +112,7 @@ export function Add_plan_tier_BTN() {
         </DialogTrigger>
         <span>Add New Subscription Tier</span>
       </div>
+
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Subscription Plan</DialogTitle>
@@ -114,6 +122,7 @@ export function Add_plan_tier_BTN() {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+          {/* Plan Name */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
@@ -127,36 +136,43 @@ export function Add_plan_tier_BTN() {
             />
           </div>
 
+          {/* Price */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="price" className="text-right">
               Price
             </Label>
             <Input
               id="price"
+              type="number"
+              min="0"
+              step="0.01"
               value={formData.price}
               onChange={(e) => handleInputChange(e, "price")}
               className="col-span-3"
-              type="number"
               placeholder="Enter price"
             />
           </div>
 
+          {/* Duration Selector */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="duration" className="text-right">
-              Duration (Months)
+              Duration
             </Label>
-            <Input
+            <select
               id="duration"
               value={formData.duration}
               onChange={(e) => handleInputChange(e, "duration")}
-              className="col-span-3"
-              type="number"
-              min="1"
-              placeholder="Duration in months"
-            />
+              className="col-span-3 border rounded-md px-3 py-2 text-sm"
+            >
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+                <option key={month} value={month}>
+                  {month} {month === 1 ? "month" : month === 12 ? "months (1 year)" : "months"}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Dynamic Features */}
+          {/* Features List */}
           {formData.features.map((feature, index) => (
             <div key={index} className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor={`feature-${index}`} className="text-right">
@@ -172,19 +188,21 @@ export function Add_plan_tier_BTN() {
             </div>
           ))}
 
+          {/* Add More Features */}
           <div className="flex justify-end">
             <Button type="button" onClick={addFeature} className="text-sm text-white mt-2">
               Add More Features
             </Button>
           </div>
 
+          {/* Submit Button */}
           <DialogFooter>
-            <Button type="submit">
-              {loading ? <Loader className=" size-4 animate-spin"/> : 'Save Plan'}
+            <Button type="submit" disabled={loading}>
+              {loading ? <Loader className="size-4 animate-spin" /> : "Save Plan"}
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

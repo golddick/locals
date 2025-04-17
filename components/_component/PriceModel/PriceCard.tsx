@@ -5,6 +5,7 @@ import { CheckIcon } from 'lucide-react'
 interface PriceCardProps {
     name:string,
     amount:number
+    duration:number
     features: string[]; 
 }
 
@@ -12,14 +13,14 @@ interface PriceProps{
     priceInfo:PriceCardProps[]
 }
 
-const PriceCard = ({ name, amount, features }: PriceCardProps) => {
+const PriceCard = ({ name, amount, features,duration }: PriceCardProps) => {
   return (
     <div className="mt-5 border-[#00000199] border-[1px] hover:bg-primary hover:text-neutral-200 rounded-xl w-full h-full">
       <div className="p-4 flex flex-col gap-2 items-start">
         <span className="text-[20px] font-medium capitalize">{name}</span>
         <div className="flex items-center gap-2">
           <p className="text-[30px] font-semibold">${amount}</p>
-          <span className="text-[20px] font-medium">per month</span>
+          <span className="text-[20px] font-medium">{duration} </span>
         </div>
         <Button className=' w-full'>Get Started</Button>
       </div>

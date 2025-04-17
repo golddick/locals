@@ -40,28 +40,28 @@ export function LoginFormInput() {
   })
 
   const onSubmit = async (credentials: any) => {
-    setIsSubmitting(true)  // Set loader to true on submit
+    setIsSubmitting(true); // Set loader to true on submit
     try {
       // Call the Login API
-      const response = await LoginApi(credentials)
-      const { data } = response
-
-      const token = response.data.token;
-
-
-      localStorage.setItem("authToken", token)
-      localStorage.setItem("userInfo", JSON.stringify(data))
-
+      const response = await LoginApi(credentials);
+      const { data } = response;
+  
+      const token = data.token;
+  
+      localStorage.setItem("userInfo", JSON.stringify(data));
+  
       // Show success message
-      toast.success("Login successful!")
-
-      router.push('/')
-    } catch (error) {
-      toast.error("Login failed. Please check your credentials.")
+      toast.success("Login successful!");
+  
+      router.push('/');
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message || "Login failed. Please check your credentials.";
+      toast.error(errorMessage);
     } finally {
-      setIsSubmitting(false)  
+      setIsSubmitting(false);
     }
-  }
+  };
+  
 
   const resetPassword = async () => {
     setIsResending(true);

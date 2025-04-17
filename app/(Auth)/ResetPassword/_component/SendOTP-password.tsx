@@ -43,10 +43,6 @@ export function SendPasswordOTP() {
         throw new Error('Failed to resend OTP');
       }
   
-      // const token = response.data.token; 
-
-      console.log(response)
-  
       // Save the token and email to localStorage
       localStorage.setItem("userEmail", email);
       // localStorage.setItem("authToken", token);
@@ -54,9 +50,9 @@ export function SendPasswordOTP() {
       // Show success toast
       toast.success("A new OTP has been sent to your email.");
       router.push('/OTP-Password')
-    } catch (error) {
-      // Show error toast
-      toast.error("Failed to resend OTP. Please try again.");
+    } catch (error:any) {
+      const errorMessage = error?.response?.data?.message || " failed. to resend otp.";
+      toast.error(errorMessage);
     }
   }
   

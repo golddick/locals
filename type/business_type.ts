@@ -51,6 +51,10 @@ export type ServiceType ={
   _id: string
   name: string,
 }
+// export type TrustedVendors ={
+//   _id: string
+//   name: string,
+// }
 
 
 export interface SpecialRequestType {
@@ -62,6 +66,13 @@ export interface SpecialRequestType {
   status: "Pending" | "Completed" | "In_Progress" | 'Terminated'
   services:ServiceType[]
   user:UserType
+}
+
+
+export interface Overview {
+ totalUsers:number
+totalBusiness:number
+totalSpecialServices:number
 }
 
 

@@ -1,52 +1,52 @@
+'use client'
+
 import { getUserInfo } from '@/app/api/auth/user'
+import { fetchTrustedVendors } from '@/app/api/get/getData'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { SquareArrowOutUpRight } from 'lucide-react'
+import { BusinessType } from '@/type/business_type'
+import { LoaderCircle, SquareArrowOutUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 // import Img from '/frameGuy.png'
 
 const HeaderBottom = () => {
 
-    const Img = 'https://github.com/shadcn.png'
+    
+    const [trustedVendors, setTrustedVendors] = useState<BusinessType[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    const TrustedVendors = [
-        {
-            id: 1,
-            Img: Img, 
-        },
-        {
-            id: 2,
-            Img: Img, 
-        },
-        {
-            id: 3,
-            Img: Img, 
-        },
-        {
-            id: 4,
-            Img: Img, 
-        },
-        {
-            id: 5,
-            Img: Img, 
-        },
-        {
-            id: 6,
-            Img: Img, 
-        },
-        {
-            id: 7,
-            Img: Img, 
-        },
-       
-      
-    ];
+  
+    // Fetch Trusted Vendors
+    useEffect(() => {
+      const loadVendor = async () => {
+        try {
+          const data = await fetchTrustedVendors();
+          if (Array.isArray(data.data)) {
+            setTrustedVendors(data.data); 
+          } else {
+            throw new Error('Fetched data is not an array');
+          }
+        } catch (error) {
+          console.error("Error fetching Vendors:", error);
+          toast.error("Failed to load Vendors");
+        } finally {
+          setLoading(false); 
+        }
+      };
+      loadVendor();
+    }, []);
+
+    if (loading || !trustedVendors) {
+        return(
+            <LoaderCircle className=' animate-spin size-4'/>
+        )
+    }
 
     const user = getUserInfo()
 
-    console.log(user, 'ss')
 
   return (
     <div className='flex items-center justify-between'>
@@ -72,10 +72,12 @@ const HeaderBottom = () => {
             <SquareArrowOutUpRight className=' text-primary cursor-pointer'/>
 
             <div className='flex w-full justify-end'>
-                            {TrustedVendors.slice(0,5).map(vendor => (
+                            {trustedVendors.slice(0,5).map(vendor => (
 
-                            <div key={vendor.id} className=' ml-[-5px]' >
-                                <img src={vendor.Img} alt={`Vendor ${vendor.id}`}  className=' w-[30px] h-[30px] object-contain rounded-full border-2 border-[#D9D9D9]'/>
+                            <div key={vendor._id} className=' ml-[-5px]' >
+                                <div className=' relative w-[40px] h-[40px]'>
+                                <Image fill src={vendor.profileUrl[0]} alt={`Vendor ${vendor.name}`}  className='  absolute object-cover rounded-full border-2 border-[#d9d9d9]'/>
+                                </div>
                             </div>
                             ))}
             </div> 

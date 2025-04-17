@@ -55,34 +55,6 @@ export function BusinessFilter() {
      </div>
 
 
-<div>
-<div className=" flex flex-col gap-2  items-start mb-2">
-     <h4 className=" text-[#706A6A] font-normal text-[15px]">Payment plan</h4>
-     </div>
-        <RadioGroup defaultValue="PH">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="PH" id="p1" />
-        <Label htmlFor="p1">Per Hour</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="PD" id="p2" />
-        <Label htmlFor="p2">Per Day</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="PW" id="p3" />
-        <Label htmlFor="p3">Per Week</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="PM" id="p4" />
-        <Label htmlFor="p4">Per Month</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="PJ" id="p5" />
-        <Label htmlFor="p5">Per Month</Label>
-      </div>
-    </RadioGroup>
-</div>
-
     </div>
   )
 }

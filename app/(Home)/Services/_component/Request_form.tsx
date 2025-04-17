@@ -1,7 +1,11 @@
-'use client'
+
+
+'use client';
 
 import { getUserInfo } from '@/app/api/auth/user';
 import { createServices } from '@/app/api/post/createSpecialService';
+import { fetchAllServices } from '@/app/api/get/getData';
+import { SpecialRequestType } from '@/type/business_type';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -17,9 +21,17 @@ import Link from 'next/link';
 import React, { useState, useEffect, useMemo } from 'react';
 import { toast } from 'sonner';
 
+interface ServiceItem {
+  _id: string;
+  name: string;
+
+}
+
 export const Request_form = () => {
   const userInfo = useMemo(() => getUserInfo(), []);
   const [loading, setIsLoading] = useState(false);
+  const [availableServices, setAvailableServices] = useState<ServiceItem[]>([]);
+
   const [formData, setFormData] = useState<{
     description: string;
     address: string;
@@ -32,10 +44,26 @@ export const Request_form = () => {
     services: [],
   });
 
-  const [availableServices] = useState([
-    { id: '67de7b6e779453c5be374ca5', name: "Service 1" },
-    { id: '67de8311779453c5be374d07', name: "Service 2" }
-  ]);
+
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await fetchAllServices();
+        if (!res) throw new Error('Failed to fetch services');
+        // const data = await res.json();
+        console.log(res, 'ssss')
+        setAvailableServices(res?.data);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+        toast.error('Could not load available services');
+      }
+    };
+
+    fetchServices()
+
+  }, [])
+
 
   useEffect(() => {
     if (userInfo) {
@@ -47,9 +75,9 @@ export const Request_form = () => {
   }, [userInfo]);
 
   const handleSelect = (value: string) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const services = prev.services.includes(value)
-        ? prev.services.filter(service => service !== value)
+        ? prev.services.filter((service) => service !== value)
         : [...prev.services, value];
       return { ...prev, services };
     });
@@ -94,91 +122,89 @@ export const Request_form = () => {
   const renderSelectedServices = () => {
     if (formData.services.length === 0) return 'Select services...';
     return availableServices
-      .filter(service => formData.services.includes(service.id))
-      .map(service => service.name)
+      .filter((service) => formData.services.includes(service._id))
+      .map((service) => service.name)
       .join(', ');
   };
 
   return (
     <div className="flex flex-col gap-10 items-start w-full border-b pb-8 md:border-none md:pb-0">
-      <form onSubmit={handleSubmit} className='w-full'>
-        <div className='flex flex-col gap-4 items-start w-full'> 
-          <h1 className='text-[30px] font-semibold flex items-center gap-2'>
-            Service <span className='text-primary'>Request</span> 
-            <Link href={'/Services/Prev_Request'}> 
-              <MoveUpRight className='size-4'/> 
+      <form onSubmit={handleSubmit} className="w-full">
+        <div className="flex flex-col gap-4 items-start w-full">
+          <h1 className="text-[30px] font-semibold flex items-center gap-2">
+            Service <span className="text-primary">Request</span>
+            <Link href={'/Services/Prev_Request'}>
+              <MoveUpRight className="size-4" />
             </Link>
           </h1>
-          
-          <h2 className='text-[17px] text-[#282828] font-medium'>Contact Details</h2>
 
-          <div className='grid grid-cols-2 w-full justify-between gap-5 items-center'>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="Name" className='text-[15px] font-medium'>Name</label>
-              <Input 
+          <h2 className="text-[17px] text-[#282828] font-medium">Contact Details</h2>
+
+          <div className="grid grid-cols-2 w-full justify-between gap-5 items-center">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="Name" className="text-[15px] font-medium">Name</label>
+              <Input
                 value={userInfo?.firstname || ''}
                 readOnly
-                className='shadow-md shadow-[#00000040] rounded-xl bg-gray-100'
+                className="shadow-md shadow-[#00000040] rounded-xl bg-gray-100"
               />
             </div>
 
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="Email" className='text-[15px] font-medium'>Email</label>
-              <Input 
+            <div className="flex flex-col gap-2">
+              <label htmlFor="Email" className="text-[15px] font-medium">Email</label>
+              <Input
                 value={userInfo?.email || ''}
                 readOnly
-                className='shadow-md shadow-[#00000040] rounded-xl bg-gray-100'
+                className="shadow-md shadow-[#00000040] rounded-xl bg-gray-100"
               />
             </div>
           </div>
 
-          <div className='grid grid-cols-2 w-full justify-between gap-5 items-center'>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="Number" className='text-[15px] font-medium'>Mobile Number</label>
-              <Input 
+          <div className="grid grid-cols-2 w-full justify-between gap-5 items-center">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="Number" className="text-[15px] font-medium">Mobile Number</label>
+              <Input
                 value={userInfo?.phone || ''}
                 readOnly
-                className='shadow-md shadow-[#00000040] rounded-xl bg-gray-100'
+                className="shadow-md shadow-[#00000040] rounded-xl bg-gray-100"
               />
             </div>
 
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="Address" className='text-[15px] font-medium'>Address</label>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="Address" className="text-[15px] font-medium">Address</label>
               <Input
                 value={formData.address}
-                onChange={(e) => setFormData({...formData, address: e.target.value})}
-                placeholder='No 26 lokoja asaba'
-                className='shadow-md shadow-[#00000040] rounded-xl'
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                placeholder="No 26 lokoja asaba"
+                className="shadow-md shadow-[#00000040] rounded-xl"
               />
             </div>
           </div>
         </div>
 
+        <div className="flex flex-col gap-2 w-full mt-5">
+          <label htmlFor="Service" className="text-[15px] font-medium">Service Description</label>
+          <Textarea
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            placeholder="Briefly describe request...."
+            className="shadow-md shadow-[#00000040] rounded-xl w-full h-[100px]"
+          />
+        </div>
 
-            <div className='flex flex-col gap-2 w-full  mt-5'>
-              <label htmlFor="Service" className='text-[15px] font-medium'>Service Description</label>
-              <Textarea
-                value={formData.description}
-                onChange={(e) => setFormData({...formData, description: e.target.value})}
-                placeholder='Briefly describe request....'
-                className='shadow-md shadow-[#00000040] rounded-xl w-full h-[100px]'
-              />
-            </div>
-
-        <div className=" grid grid-cols-2 w-full justify-between gap-5 items-center mt-5 ">  
-
-          <div className="flex flex-col gap-2 w-full ">
+        <div className="grid grid-cols-2 w-full justify-between gap-5 items-center mt-5">
+          <div className="flex flex-col gap-2 w-full">
             <label htmlFor="services" className="text-[15px] font-medium">Services</label>
             <Select onValueChange={handleSelect}>
               <SelectTrigger className="w-full shadow-md shadow-[#00000040] rounded-xl">
                 <SelectValue placeholder={renderSelectedServices()} />
               </SelectTrigger>
               <SelectContent className="max-h-60 bg-white overflow-y-auto">
-                {availableServices.map(service => (
-                  <SelectItem 
-                    key={service.id} 
-                    value={service.id}
-                    className={formData.services.includes(service.id) ? 'bg-accent' : ''}
+                {availableServices.map((service) => (
+                  <SelectItem
+                    key={service._id}
+                    value={service._id}
+                    className={formData.services.includes(service._id) ? 'bg-accent' : ''}
                   >
                     {service.name}
                   </SelectItem>
@@ -186,13 +212,10 @@ export const Request_form = () => {
               </SelectContent>
             </Select>
             <div className="flex flex-wrap gap-2 mt-2">
-              {formData.services.map(serviceId => {
-                const service = availableServices.find(s => s.id === serviceId);
+              {formData.services.map((serviceId) => {
+                const service = availableServices.find((s) => s._id === serviceId);
                 return service ? (
-                  <span 
-                    key={serviceId}
-                    className="px-2 py-1 bg-accent text-xs rounded-full"
-                  >
+                  <span key={serviceId} className="px-2 py-1 bg-accent text-xs rounded-full">
                     {service.name}
                   </span>
                 ) : null;
@@ -221,3 +244,4 @@ export const Request_form = () => {
     </div>
   );
 };
+

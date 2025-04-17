@@ -3,8 +3,8 @@ import { getToken } from "../auth/OTP"; // Import the function to get the token
 // Function to create a new subscription plan
 export const createSubscriptionPlan = async (subscriptionData: {
   name: string;
-  price: string;
-  duration: string;
+  price: number;
+  duration: number;
   features: string[];
 }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;

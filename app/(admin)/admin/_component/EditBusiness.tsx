@@ -86,39 +86,74 @@ const EditBusinessProfile = ({ businessId }: Props) => {
     };
 
     // Handle form submission (updating business data)
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault();
+
+    //     // Validate phone number
+    //     if (!validatePhoneNumber(formData.businessPhone)) {
+    //         toast.error('Phone number must include a country code (e.g., +234 80 1234 5678)');
+    //         return;
+    //     }
+
+    //     try {
+    //         const businessData = {
+    //             name: formData.businessName,
+    //             email: formData.businessEmail,
+    //             phone: formData.businessPhone,
+    //             address: formData.businessAddress,
+    //             description: formData.businessBio,
+    //             // services: formData.businessServices.map((service) => service._id), 
+    //             category: formData.businessCategory,
+    //             profileUrl: selectedImage ? [selectedImage] : ['/no-image-icon.png'],
+    //         };
+
+
+    //         const response = await AdminUpdateBusinessInfo(businessId, businessData);
+    //         if (response) {
+    //             toast.success('Business updated successfully!');
+    //         } else {
+    //             toast.error('Failed to update business.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error updating business data:', error);
+    //         toast.error('Error updating business.');
+    //     }
+    // };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+      
         // Validate phone number
         if (!validatePhoneNumber(formData.businessPhone)) {
-            toast.error('Phone number must include a country code (e.g., +234 80 1234 5678)');
-            return;
+          toast.error('Phone number must include a country code (e.g., +234 80 1234 5678)');
+          return;
         }
-
+      
         try {
-            const businessData = {
-                name: formData.businessName,
-                email: formData.businessEmail,
-                phone: formData.businessPhone,
-                address: formData.businessAddress,
-                description: formData.businessBio,
-                // services: formData.businessServices.map((service) => service._id), 
-                category: formData.businessCategory,
-                profileUrl: selectedImage ? [selectedImage] : ['/no-image-icon.png'],
-            };
-
-
-            const response = await AdminUpdateBusinessInfo(businessId, businessData);
-            if (response) {
-                toast.success('Business updated successfully!');
-            } else {
-                toast.error('Failed to update business.');
-            }
-        } catch (error) {
-            console.error('Error updating business data:', error);
-            toast.error('Error updating business.');
+          const businessData = {
+            name: formData.businessName,
+            email: formData.businessEmail,
+            phone: formData.businessPhone,
+            address: formData.businessAddress,
+            description: formData.businessBio,
+            category: formData.businessCategory,
+            profileUrl: selectedImage ? [selectedImage] : ['/no-image-icon.png'],
+          };
+      
+          const response = await AdminUpdateBusinessInfo(businessId, businessData);
+      
+          if (response?.success) {
+            toast.success('Business updated successfully!');
+          } else {
+            toast.error(response?.message || 'Failed to update business.');
+          }
+        } catch (error: any) {
+          const errorMessage = error?.message || 'Something went wrong while updating the business.';
+          console.error('Error updating business data:', error);
+          toast.error(errorMessage);
         }
-    };
+      };
+      
 
     // Handle input change to update formData state
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -1,45 +1,53 @@
+'use client'
+
+import { fetchBusinessUnderCategory } from '@/app/api/get/getData'
 import { Button } from '@/components/ui/button'
-import { SquareArrowOutUpRight } from 'lucide-react'
+import { BusinessType } from '@/type/business_type'
+import { LoaderCircle, SquareArrowOutUpRight } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 // import Img from '/frameGuy.png'
 
-const TopUser = () => {
+interface Props {
+    categoryID:string
+}
 
-    const Img = 'https://github.com/shadcn.png'
+const TopUser = ({categoryID}:Props) => {
 
-    const TrustedVendors = [
-        {
-            id: 1,
-            Img: Img, 
-        },
-        {
-            id: 2,
-            Img: Img, 
-        },
-        {
-            id: 3,
-            Img: Img, 
-        },
-        {
-            id: 4,
-            Img: Img, 
-        },
-        {
-            id: 5,
-            Img: Img, 
-        },
-        {
-            id: 6,
-            Img: Img, 
-        },
-        {
-            id: 7,
-            Img: Img, 
-        },
-       
-      
-    ];
+    const [topListing, setTopListing] = useState<BusinessType[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+  
+    // Fetch Top Listing Businesses
+    useEffect(() => {
+      const loadBusiness = async () => {
+        try {
+          const data = await fetchBusinessUnderCategory(categoryID);
+          if (Array.isArray(data.data)) {
+            setTopListing(data.data); 
+          } else {
+            throw new Error('Fetched data is not an array');
+          }
+        } catch (error) {
+          console.error("Error fetching Vendors:", error);
+          toast.error("Failed to load Vendors");
+        } finally {
+          setLoading(false); 
+        }
+      };
+      loadBusiness();
+    }, []);
+
+    if (loading || !topListing) {
+        return(
+            <LoaderCircle className=' animate-spin size-4'/>
+        )
+    }
+
+    console.log(topListing,'tp')
+
+
 
   return (
     <div className='flex items-center justify-between'>
@@ -47,10 +55,12 @@ const TopUser = () => {
        
 
             <div className='flex w-full justify-end'>
-                            {TrustedVendors.slice(0,3).map(vendor => (
+                            {topListing.slice(0,3).map(vendor => (
 
-                            <div key={vendor.id} className=' ml-[-5px]' >
-                                <img src={vendor.Img} alt={`Vendor ${vendor.id}`}  className=' w-[35px] h-[35px] object-contain rounded-full border-2 border-[#D9D9D9]'/>
+                            <div key={vendor._id} className=' ml-[-5px]' >
+                                 <div className=' relative w-[40px] h-[40px]'>
+                                <Image fill src={vendor.profileUrl[0]} alt={`Vendor ${vendor.name}`}  className='  absolute object-cover rounded-full border-2 border-[#d9d9d9]'/>
+                                </div>
                             </div>
                             ))}
             </div> 

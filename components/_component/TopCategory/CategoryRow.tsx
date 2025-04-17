@@ -15,10 +15,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
 import { getAllCategory } from '@/app/api/get/categorie';
 import LoaderCircle from '../Loader/Loader';
+import { CategoryType } from '@/type/business_type';
 
 export default function CategoryRow() {
   const Img = 'https://github.com/shadcn.png';
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -104,7 +105,7 @@ export default function CategoryRow() {
         ) : (
           categories.map((category, index) => (
             <SwiperSlide key={index}>
-              <CategoryCard bg={Img} BTNText={category.name} />
+              <CategoryCard bg={Img} BTNText={category.name} categoryID={category._id} />
             </SwiperSlide>
           ))
         )}

@@ -63,7 +63,7 @@ export const updateUserInfo = async (userId: string, userData: any) => {
         'Content-Type': 'application/json',
       };
   
-      const response = await fetch(`${apiUrl}/admin/users/${userId}`, {
+      const response = await fetch(`${apiUrl}/users/${userId}/update`, {
         method: 'PATCH',
         headers: headers,
         body: JSON.stringify(userData),
@@ -102,7 +102,7 @@ export const updateUserInfo = async (userId: string, userData: any) => {
         };
       
 
-        const response = await fetch(`${apiUrl}/admin/users/${userId}/restrict`, {
+        const response = await fetch(`${apiUrl}/users/${userId}/restrict`, { 
             method: 'PATCH',
             headers: headers,
             body: JSON.stringify({ status }), 

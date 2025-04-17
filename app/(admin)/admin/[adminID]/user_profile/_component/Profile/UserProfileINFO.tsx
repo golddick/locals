@@ -33,7 +33,7 @@ export const UserProfileINFO = () => {
               }, []);
 
 
-              console.log(user, 'man use')
+              console.log(user, 'man use n')
               const name = [user?.firstname, user?.lastname].filter(Boolean).join(" ");
   return (
     <div className=' flex flex-col w-full h-full p-2  gap-4'>

@@ -4,9 +4,10 @@ import TopUser from "./TopUser";
 interface CategoryCardProps {
     bg: string; 
     BTNText: string; 
+    categoryID: string; 
   }
   
-  const CategoryCard = ({ bg, BTNText }: CategoryCardProps) => {
+  const CategoryCard = ({ bg, BTNText , categoryID}: CategoryCardProps) => {
     return (
       <div
         className="w-full h-[300px] rounded-xl bg-cover bg-center"
@@ -14,7 +15,7 @@ interface CategoryCardProps {
       >
         <div className="flex h-full  relative ">
             <div className=" ml-3 p-1 py-2">
-                <TopUser/>
+                <TopUser categoryID={categoryID}/>
                 <span className=" text-[10px] bg-primary text-white  p-1 px-4 rounded-full">Top Listing</span>
             </div>
 

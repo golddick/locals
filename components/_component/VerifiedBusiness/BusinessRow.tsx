@@ -21,11 +21,9 @@ const BusinessRow = () => {
     const fetchBusinesses = async () => {
       try {
         const response = await getAllBusinesses(page, limit);
-        console.log(response, 'API response'); // Log the response to inspect its structure
   
-        // Ensure the response has the expected structure
         if (response && response.status === 'success' && Array.isArray(response.data)) {
-          setBusinesses(response.data); // Update the state with the businesses array
+          setBusinesses(response.data); 
         } else {
           throw new Error('Invalid response structure');
         }
@@ -36,17 +34,13 @@ const BusinessRow = () => {
           setError(String(err)); 
         }
       } finally {
-        setLoading(false); // Ensure loading is set to false regardless of success or failure
+        setLoading(false);
       }
     };
   
     fetchBusinesses();
   }, [page, limit]);
 
-
-
-
-        console.log(businesses,'uuuu')
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage); 
