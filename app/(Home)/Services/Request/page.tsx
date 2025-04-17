@@ -7,7 +7,12 @@ import React from 'react'
 import { Message_admin } from '../_component/Message_admin'
 import { Request_form } from '../_component/Request_form'
 
+
+
 const page = () => {
+
+   
+  
   return (
     <div className='gap-4 w-full  py-10 flex flex-col  px-5 md:px-20 items-start '> 
    

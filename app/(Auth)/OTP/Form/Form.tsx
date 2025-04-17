@@ -63,27 +63,37 @@ export function OTPFormInput() {
   }
 
   // Function to resend OTP
+
   async function resendOTP() {
-    setIsResending(true)
-
+    setIsResending(true);
+  
     try {
-      // Call the resend OTP API
       const email = localStorage.getItem("userEmail");
+  
       if (!email) {
-        toast.error('No Email ')
-        router.push('/ResendOTP');
-        return null
+        toast.error("No Email");
+        router.push("/ResendOTP");
+        return null;
       }
-      const response = await resendOtp(email)
-
-      // Show a success message after resending OTP
-      toast.success("A new OTP has been sent to your email.")
+  
+      const response = await resendOtp(email);
+  
+      // Assuming token is in response.data.token or similar
+      const token = response?.data?.token;
+  
+      if (token) {
+        localStorage.setItem("authToken", token);
+      }
+  
+      toast.success("A new OTP has been sent to your email.");
     } catch (error) {
-      toast.error("Failed to resend OTP. Please try again.")
+      console.error("Resend OTP error:", error);
+      toast.error("Failed to resend OTP. Please try again.");
     } finally {
-      setIsResending(false)
+      setIsResending(false);
     }
   }
+  
 
   return (
     <>

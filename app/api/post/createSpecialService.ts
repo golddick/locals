@@ -3,7 +3,7 @@ import { getToken } from "../auth/OTP"; // Import the function to get the token
 // Function to create a new service
 export const createServices = async (ServiceData: {
   description: string;
-  expireyDate: string;
+  expireyDate: Date;
   address: string;
   services:string[]
 }) => {

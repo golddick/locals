@@ -10,6 +10,10 @@ interface CategoryCardProps {
 }
 
 export const CategoryCard = ({info}:CategoryCardProps) => {
+
+    if (!info || !info.user) {
+        return <div>Loading or no user data...</div>
+    }
   return (
     <div className=' flex flex-col items-start justify-start w-full gap-6'>
        

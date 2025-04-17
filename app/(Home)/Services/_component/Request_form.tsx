@@ -20,6 +20,7 @@ import { Loader, MoveUpRight } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState, useEffect, useMemo } from 'react';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface ServiceItem {
   _id: string;
@@ -28,6 +29,17 @@ interface ServiceItem {
 }
 
 export const Request_form = () => {
+
+  
+  const router = useRouter()
+  const user = getUserInfo()
+
+  if (!user) {
+    toast.error('No user logged in')
+    router.push('/')
+  }
+
+
   const userInfo = useMemo(() => getUserInfo(), []);
   const [loading, setIsLoading] = useState(false);
   const [availableServices, setAvailableServices] = useState<ServiceItem[]>([]);
@@ -35,12 +47,12 @@ export const Request_form = () => {
   const [formData, setFormData] = useState<{
     description: string;
     address: string;
-    expiryDate: string;
+    expiryDate: Date;
     services: string[];
   }>({
     description: '',
     address: '',
-    expiryDate: '',
+    expiryDate: new Date(),
     services: [],
   });
 
@@ -97,7 +109,8 @@ export const Request_form = () => {
       const ServiceData = {
         description: formData.description,
         address: formData.address,
-        expireyDate: formData.expiryDate.split('-').reverse().join('-'),
+        expireyDate: new Date(formData.expiryDate),
+        // expireyDate: formData.expiryDate,
         services: formData.services,
       };
 
@@ -108,7 +121,7 @@ export const Request_form = () => {
       setFormData({
         description: '',
         address: '',
-        expiryDate: '',
+        expiryDate: new Date(),
         services: [],
       });
     } catch (error) {
@@ -227,8 +240,8 @@ export const Request_form = () => {
             <label htmlFor="date" className="text-[15px] font-medium">Due date</label>
             <Input
               type="date"
-              value={formData.expiryDate}
-              onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
+              value={formData.expiryDate.toISOString().split('T')[0]}
+              onChange={(e) => setFormData({ ...formData, expiryDate: new Date(e.target.value) })}
               className="shadow-md shadow-[#00000040] rounded-xl"
             />
           </div>

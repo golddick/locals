@@ -7,8 +7,20 @@ import React, { useEffect, useState } from 'react'
 import { Prev_req_card } from './Prev_req_card'
 import { getAllUserSpecialRequest } from '@/app/api/get/allRequest'
 import LoaderCircle from '@/components/_component/Loader/Loader'
+import { getUserInfo } from '@/app/api/auth/user'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 export const Prev_Request = () => {
+
+  const router = useRouter()
+  const user = getUserInfo()
+
+  if (!user) {
+    toast.error('No user logged in')
+    router.push('/')
+  }
+
   
   const [request, setRequest] = useState<SpecialRequestType[]> ([])
               const [error, setError] = useState<string>()

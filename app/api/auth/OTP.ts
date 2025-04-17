@@ -1,10 +1,28 @@
 // Function to get the token from localStorage
-export const getToken = () => {
+export const getauthToken = () => {
   if (typeof window !== 'undefined') {
     return localStorage.getItem('authToken'); 
   }
   return null;
 };
+
+export const getToken = () => {
+  if (typeof window !== 'undefined') {
+    const storedUser = localStorage.getItem('userInfo');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        return parsedUser.token || null;
+      } catch (err) {
+        console.error('Error parsing userInfo from localStorage', err);
+        return null;
+      }
+    }
+  }
+  return null;
+};
+
+
 
 
 // Verify OTP Function
@@ -16,7 +34,7 @@ export const verifyEmailOtp = async (otp: string) => {
   }
 
   try {
-    const token = getToken();
+    const token = getauthToken();
 
 
     if (!token) {
@@ -24,7 +42,7 @@ export const verifyEmailOtp = async (otp: string) => {
     }
 
     const headers = {
-      'localsToken': `${token}`,  
+      'Bearer-localsToken': `${token}`,  
       'Content-Type': 'application/json',
     };
 

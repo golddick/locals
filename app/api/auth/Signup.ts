@@ -36,9 +36,9 @@ const SignupApi = async (data: any) => {
       }
 
 
-  console.log(data, 'res data')
-  console.log(data.data.token, 'res token')
-  console.log(response, 'res')
+  // console.log(data, 'res data')
+  // console.log(data.data.token, 'res token')
+  // console.log(response, 'res')
 
   return data;
 }
