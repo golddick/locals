@@ -56,12 +56,13 @@ const BusinessProfilInfo = ( {businessid}:Props) => {
                 }
 
   return (
-    <div className='grid  grid-cols-1 gap-4 lg:grid-cols-2 w-full min-h-screen lg:gap-6   px-5   lg:px-20  lg:py-10   mt-5'>
+    // <div className='grid  grid-cols-1 gap-4 lg:grid-cols-2 w-full min-h-screen lg:gap-6   px-5   lg:px-20  lg:py-10   mt-5'>
+    <div className='flex items-center gap-4 flex-wrap   px-5   lg:px-20  lg:py-10 mt-5'>
             <div className='w-full '>
                <Details businessId={id} name={business.name} des={business.description} categories={business.services.map(service => service.name)} Review={business.Review || ''} Address={business.address}  Contact={business.phone}  businessOwner={businessOwner} />
             </div>
 
-            <div>
+            <div className=' w-full'>
             <ImgGallery imgUrls={business.profileUrl }/>
             </div>
     </div>

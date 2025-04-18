@@ -21,7 +21,7 @@ export const columns : ColumnDef<SpecialRequestType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const name = row.original.user.firstname; 
+      const name = row.original.user?.firstname; 
   
       return (
 
@@ -41,7 +41,7 @@ export const columns : ColumnDef<SpecialRequestType>[] = [
       </Button>
     ),
     cell: ({ row }) => {
-      const email = row.original.user.email; 
+      const email = row.original.user?.email; 
   
       return (
 

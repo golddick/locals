@@ -1,30 +1,4 @@
 
-// import ProfileNav from '@/app/(Home)/Profile/[id]/ProfileNav';
-// import CreateBusiness from './CreateBusiness';
-// import { useUserID } from '@/hooks/use-get-userID';
-
-// const BusinessProfile = () => {
-
-//   const userId = useUserID();
-
-
-
-//   return (
-//     <div className='grid grid-cols-[0.5fr_3fr] gap-4 md:gap-10 w-full py-10 px-10 md:px-20'>
-
-//       <div className='w-full flex flex-col gap-4'>
-//         <h1 className='text-[25px] lg:text-[30px] font-semibold whitespace-nowrap md:text-[30px] hidden md:block'>
-//           My <span className='text-primary'>Business page</span>
-//         </h1>
-//         <ProfileNav />
-//       </div>
-
-//      <CreateBusiness/>
-//     </div>
-//   );
-// };
-
-// export default BusinessProfile;
 
 'use client'
 
@@ -92,8 +66,8 @@ const BusinessProfile = () => {
   // console.log(businessData, 'nus')
 
   return (
-    <div className='grid grid-cols-[0.5fr_3fr] gap-4 md:gap-10 w-full md:py-10 px-2 md:px-5 lg:px-20  h-auto'>
-      <div className='w-full flex flex-col gap-4'>
+    <div className='grid grid-cols-[0.5fr_3fr] gap-4  mt- w-full md:py-10 px-2 md:px-5 lg:px-20  h-auto '>
+      <div className='w-full flex flex-col gap-4  mt-5'>
         <h1 className='text-[25px] lg:text-[30px] font-semibold whitespace-nowrap md:text-[30px] hidden md:block'>
           My <span className='text-primary'>Business page</span>
         </h1>

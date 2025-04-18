@@ -31,7 +31,7 @@ export function EditBTN({businessId}:Prop) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size={'lg'}  className=" mt-5">Edit </Button>
+        <Button   className=" mt-5 w-[100px] md:w-[200px]">Edit </Button>
       </DialogTrigger>
       <DialogContent className="w-full h-full lg:h-[600px] overflow-scroll hidden-scrollbar m-auto">
         <DialogHeader>

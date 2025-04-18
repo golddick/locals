@@ -15,9 +15,9 @@ const ImgGallery = ({ imgUrls }: ImgGalleryProps) => {
   };
 
   return (
-    <div className='flex flex-col w-full gap-4'>
+    <div className='flex flex-col w-full gap-4 '>
       {/* Large Image Display */}
-      <div className=' overflow-hidden w-full h-[300px] lg:w-[600px] m-auto  lg:h-[500px] relative rounded-xl '>
+      <div className=' overflow-hidden w-full h-[300px] md:w-[400px] lg:w-[600px] m-auto  lg:h-[500px] relative rounded-xl  '>
         <Image src={selectedImg} alt='img' fill className='object-cover absolute rounded-lg' />
       </div>
 
