@@ -48,7 +48,7 @@ const BusinessRow = () => {
 
   if (loading) return <LoaderCircle />;
 
-  if (error) return <div className=' text-red-600'>Error: {error}</div>;
+  if (error) return <div className=' text-red-600'>Error {error}</div>;
 
   return (
     <div className="w-full flex flex-col gap-8">
