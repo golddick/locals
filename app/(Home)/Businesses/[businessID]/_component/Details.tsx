@@ -60,7 +60,7 @@ const Details = ({name, des, categories, Review, Address, Contact, businessOwner
         <span className='text-[16px]  font-normal'>{des}</span>
 
 
-        <div className='flex gap-4 items-start'>
+        <div className='flex flex-col gap-4 items-start'>
             <div className=' flex items-center gap-2'>
                 <MapPin className='w-4 h-4'/>
                 <span className='text-[15px] md:text-[20px] font-medium'>{Address}</span>
